@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'; 
 
 import { Link as RouterLink, UIMatch, useMatches } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export const Breadcrumbs = ({ selectedCategory, selectedCategorySlug }: Props) =
 
     if (selectedCategory && selectedCategorySlug) {
         breadcrumbs.push({
-            breadcrumb: selectedCategory, 
+            breadcrumb: selectedCategory,
             path: `/${selectedCategorySlug}`,
         });
     }

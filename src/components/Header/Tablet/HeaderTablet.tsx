@@ -13,7 +13,6 @@ import people from '/people.svg';
 import { useViewport } from '~/utils/ViewportProvider';
 
 import s from './HeaderTablet.module.css';
-
 import { Menu } from './Menu/Menu';
 
 
