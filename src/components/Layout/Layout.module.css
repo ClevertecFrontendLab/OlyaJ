@@ -1,0 +1,41 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-top: 120px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1360px;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .body {
+        padding-top: 56px;
+    }
+
+    .content {
+        width: 768px;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .body {
+        padding-top: 48px;
+    }
+
+    .content {
+        width: 100%;
+        padding: 0 12px;
+    }
+}

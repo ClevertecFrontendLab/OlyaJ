@@ -1,0 +1,101 @@
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    border: 1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08));
+    background: var(--white, #fff);
+    gap: 16px;
+    padding: 24px;
+    height: 184px;
+    max-width: 426px;
+    width: 100%;
+}
+
+.avatarContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.nameEmailContainar {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    color: var(--black, #000);
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 500;
+    line-height: 28px;
+
+    max-width: 154px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.email {
+    color: var(--blackAlpha-700, rgba(0, 0, 0, 0.64));
+    font-size: clamp(12px, 2vw, 14px);
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.text {
+    color: var(--black, #000);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    height: 64px;
+    align-self: stretch;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+    .reviewContainer {
+        gap: 12px;
+        padding: 16px;
+        height: 152px;
+        width: 226px;
+        overflow: hidden;
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .avatarContainer {
+        gap: 4px;
+    }
+
+    .text {
+        height: 64px;
+        color: var(--black, #000);
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 360px) {
+    .reviewContainer {
+        gap: 12px;
+        width: 304px;
+        overflow: hidden;
+        padding: 12px;
+    }
+}

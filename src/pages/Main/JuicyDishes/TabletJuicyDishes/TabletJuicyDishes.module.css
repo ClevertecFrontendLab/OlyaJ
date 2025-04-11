@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+    width: 100%;
+    max-width: 728px;
+    overflow-x: hidden;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.mobileButton {
+    border-radius: 6px;
+    background: var(--Lime-400, #b1ff2e);
+    width: 167px;
+    height: 40px;
+}
+
+@media (max-width: 360px) {
+    .wrapper {
+        width: 360px;
+        align-items: center;
+    }
+
+    .cardsContainer {
+        gap: 12px;
+    }
+
+    .container {
+        max-width: 360px;
+    }
+}

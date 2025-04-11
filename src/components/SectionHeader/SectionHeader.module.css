@@ -1,0 +1,108 @@
+.sectionHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.title {
+    color: var(--black, #000);
+    text-align: center;
+    font-size: clamp(24px, 2vw, 48px);
+    font-weight: 700;
+    line-height: clamp(32px, 2vw, 48px);
+}
+
+.filterIcon {
+    width: 48px;
+    height: 48px;
+}
+
+.description {
+    max-width: 696px;
+    width: 100%;
+    color: var(--blackAlpha-600, rgba(0, 0, 0, 0.48));
+    text-align: center;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.input {
+    width: 458px !important;
+}
+
+.input::placeholder {
+    color: var(--Lime-800, #134b00);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+}
+
+.searchIcon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.filterInputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggleWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.selectWrapper {
+    display: flex;
+    gap: 16px;
+}
+
+.select {
+    width: 234px !important;
+}
+
+@media (max-width: 768px) {
+    .input {
+        width: 404px !important;
+    }
+
+    .sectionHeader {
+        gap: 6px;
+    }
+
+    .filterIcon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .input::placeholder {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .input {
+        width: 284px !important;
+    }
+
+    .filterIcon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .description {
+        width: 328px;
+    }
+}

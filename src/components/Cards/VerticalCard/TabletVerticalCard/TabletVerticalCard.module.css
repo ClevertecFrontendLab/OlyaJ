@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-wrap: row;
+    border-radius: 8px;
+    border: 1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08));
+    background: var(--white, #fff);
+    overflow: hidden;
+    position: relative;
+    width: 356px;
+    height: 128px;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 8px;
+}
+
+.informationContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.buttonTabletContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+.cookTabletButton {
+    border-radius: 6px;
+    background: var(--blackAlpha-900, rgba(0, 0, 0, 0.92));
+    color: var(--white, #fff);
+}
+
+.saveTabletButton {
+    border-radius: 6px;
+    border: 1px solid var(--blackAlpha-600, rgba(0, 0, 0, 0.48));
+    background: var(--whiteAlpha-100, rgba(255, 255, 255, 0.06));
+}
+
+@media (max-width: 360px) {
+    .container {
+        width: 328px;
+    }
+}

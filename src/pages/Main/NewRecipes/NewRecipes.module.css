@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    gap: 12px;
+    position: relative;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 16px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.arrowLeft,
+.arrowRight {
+    position: absolute;
+    top: 150px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.arrowLeft {
+    left: -20px;
+}
+
+.arrowRight {
+    right: -20px;
+}
+
+@media (max-width: 768px) {
+    .arrowLeft,
+    .arrowRight {
+        display: none;
+    }
+}

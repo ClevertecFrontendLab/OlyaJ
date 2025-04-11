@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 54px;
+}
+
+.cardsContainer {
+    margin-top: 54px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.button {
+    border-radius: 6px;
+    background: var(--Lime-400, #b1ff2e);
+    width: 152px;
+    height: 40px;
+    margin-top: 24px;
+}
