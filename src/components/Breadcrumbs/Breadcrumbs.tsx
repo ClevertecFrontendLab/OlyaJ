@@ -25,8 +25,8 @@ export const Breadcrumbs = ({ selectedCategory, selectedCategorySlug }: Props) =
 
     if (selectedCategory && selectedCategorySlug) {
         breadcrumbs.push({
-            breadcrumb: selectedCategory, // или читаемое имя
-            path: `/${selectedCategorySlug}`, // может быть не нужен, если не используешь переход
+            breadcrumb: selectedCategory, 
+            path: `/${selectedCategorySlug}`,
         });
     }
 
