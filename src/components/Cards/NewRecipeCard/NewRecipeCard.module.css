@@ -32,7 +32,7 @@
 .title {
     color: var(--black, #000);
     font-size: clamp(16px, 2vw, 20px);
-    font-weight: 500;
+    font-weight: 600;
     line-height: clamp(20px, 2vw, 28px);
     width: 274px;
     white-space: nowrap;
@@ -165,5 +165,9 @@
     .recipeCard.expanded .labelContainer {
         left: 8px;
         top: 135px;
+    }
+
+    .recipeCard.expanded .title {
+       width:304px;
     }
 }

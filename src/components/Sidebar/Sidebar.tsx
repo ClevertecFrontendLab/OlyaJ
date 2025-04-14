@@ -257,6 +257,8 @@ export const Sidebar = () => {
                                         backgroundColor={
                                             activeIndex === index ? '#EAFFC7' : 'transparent'
                                         }
+                                        fontWeight={600}
+                                        fontSize={16}
                                         data-test-id={
                                             item.slug === 'vegan' ? 'vegan-cuisine' : undefined
                                         }
