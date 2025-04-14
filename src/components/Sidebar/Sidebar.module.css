@@ -1,9 +1,8 @@
 .sidebar {
     display: flex;
     width: 256px;
-    height: calc(100vh - 80px);
-    max-height: 1040px;
-    padding: 10px;
+    height: 1040px;
+    padding-top: 24px;
     flex-direction: column;
     align-items: flex-start;
     position: fixed;
@@ -11,35 +10,22 @@
     top: 80px;
     scrollbar-width: thin;
     scrollbar-color: #c0c0c0 transparent;
-    overflow-y: auto;
     z-index: 1000;
     background: var(--background-paper-elevation-1, #fff);
+    overflow-x: hidden;
 }
 
-.sidebar:-webkit-scrollbar {
-    width: 6px;
+.scrollableContent {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    height:872px;
+    width: 100%;
 }
-
-.sidebart::-webkit-scrollbar-thumb {
-    background-color: #c0c0c0;
-    border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
+  
 .sidebarItem {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-.iconTitleWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 210px;
 }
 
 .sidebar::after {
@@ -52,24 +38,6 @@
     background-color: var(--blackAlpha-100, rgba(0, 0, 0, 0.06));
 }
 
-.button {
-    height: 38px;
-    cursor: pointer;
-    background-color: transparent;
-    color: var(--black, #000);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-}
-
-.button:hover {
-    background: var(--Lime-100, #eaffc7);
-}
-
-.active {
-    background: var(--Lime-100, #eaffc7);
-}
-
 .submenuItem {
     position: relative;
     cursor: pointer;
@@ -77,8 +45,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
-    margin: 6px 0;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
 .submenuItem::before {
@@ -131,6 +98,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width:208px;
+    margin-left:24px;
 }
 
 .text {
