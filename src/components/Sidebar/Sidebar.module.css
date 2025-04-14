@@ -18,10 +18,10 @@
 .scrollableContent {
     overflow-y: auto;
     flex: 1 1 auto;
-    height:872px;
+    height: 872px;
     width: 100%;
 }
-  
+
 .sidebarItem {
     display: flex;
     flex-direction: row;
@@ -98,8 +98,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width:208px;
-    margin-left:24px;
+    width: 208px;
+    margin-left: 24px;
 }
 
 .text {

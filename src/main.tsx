@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <ChakraProvider>
             <Provider store={store}>
                 <BreadcrumbProvider>
-                <RouterProvider router={router} />
+                    <RouterProvider router={router} />
                 </BreadcrumbProvider>
             </Provider>
         </ChakraProvider>
