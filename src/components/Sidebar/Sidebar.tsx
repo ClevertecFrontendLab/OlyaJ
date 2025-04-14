@@ -224,12 +224,12 @@ export const menuItems = [
 ];
 
 export const Sidebar = () => {
-    const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const { setActiveAccordion: setBreadcrumbAccordion, setActiveSubItem } = useBreadcrumb();
 
-    const handleAccordionClick = (itemTitle: string) => {
-        setActiveAccordion(activeAccordion === itemTitle ? null : itemTitle);
-        setBreadcrumbAccordion(itemTitle);
+    const handleAccordionClick = (index: number, itemTitle: string) => {
+        setActiveIndex(activeIndex === index ? null : index);
+        setBreadcrumbAccordion(activeIndex === index ? null : itemTitle);
         setActiveSubItem(null);
     };
 
@@ -237,50 +237,61 @@ export const Sidebar = () => {
         <div className={s.sidebar}>
             <Box className={s.scrollableContent}>
                 <VStack align='stretch' w='100%'>
-                    <Accordion>
-                        {menuItems.map((item) => (
+                    <Accordion
+                        index={activeIndex !== null ? [activeIndex] : []}
+                        onChange={(index) => {
+                            if (typeof index === 'number') {
+                                handleAccordionClick(index, menuItems[index].title);
+                            } else {
+                                setActiveIndex(null);
+                                setBreadcrumbAccordion(null);
+                            }
+                        }}
+                    >
+                        {menuItems.map((item, index) => (
                             <AccordionItem key={item.slug} border='none'>
-                                {({ isExpanded }) => (
-                                    <>
-                                        <AccordionButton
-                                            onClick={() => handleAccordionClick(item.title)}
-                                            _hover={{ backgroundColor: '#EAFFC7' }}
-                                            backgroundColor={isExpanded ? '#EAFFC7' : 'transparent'}
+                                <h2>
+                                    <AccordionButton
+                                        onClick={() => handleAccordionClick(index, item.title)}
+                                        _hover={{ backgroundColor: '#EAFFC7' }}
+                                        backgroundColor={
+                                            activeIndex === index ? '#EAFFC7' : 'transparent'
+                                        }
+                                        data-test-id={
+                                            item.slug === 'vegan' ? 'vegan-cuisine' : undefined
+                                        }
+                                    >
+                                        <Box
+                                            display='flex'
+                                            alignItems='center'
+                                            flex='1'
+                                            textAlign='left'
                                         >
-                                            <Box
-                                                display='flex'
-                                                alignItems='center'
-                                                flex='1'
-                                                textAlign='left'
+                                            <img
+                                                src={item.icon}
+                                                alt={item.title}
+                                                width='24'
+                                                height='24'
+                                            />
+                                            <Text>{item.title}</Text>
+                                        </Box>
+                                        <AccordionIcon />
+                                    </AccordionButton>
+                                </h2>
+                                <AccordionPanel>
+                                    <VStack align='start' spacing={2}>
+                                        {item.subItems.map((subItem) => (
+                                            <RouterLink
+                                                to={`/${item.slug}/${subItem.slug}`}
+                                                key={subItem.slug}
+                                                className={s.submenuItem}
+                                                onClick={() => setActiveSubItem(subItem.title)}
                                             >
-                                                <img
-                                                    src={item.icon}
-                                                    alt={item.title}
-                                                    width='24'
-                                                    height='24'
-                                                />
-                                                <Text>{item.title}</Text>
-                                            </Box>
-                                            <AccordionIcon />
-                                        </AccordionButton>
-                                        <AccordionPanel>
-                                            <VStack align='start' spacing={2}>
-                                                {item.subItems.map((subItem) => (
-                                                    <RouterLink
-                                                        to={`/${item.slug}/${subItem.slug}`}
-                                                        key={subItem.slug}
-                                                        className={s.submenuItem}
-                                                        onClick={() =>
-                                                            setActiveSubItem(subItem.title)
-                                                        }
-                                                    >
-                                                        {subItem.title}
-                                                    </RouterLink>
-                                                ))}
-                                            </VStack>
-                                        </AccordionPanel>
-                                    </>
-                                )}
+                                                {subItem.title}
+                                            </RouterLink>
+                                        ))}
+                                    </VStack>
+                                </AccordionPanel>
                             </AccordionItem>
                         ))}
                     </Accordion>

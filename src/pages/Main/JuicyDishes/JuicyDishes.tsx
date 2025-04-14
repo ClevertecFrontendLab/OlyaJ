@@ -7,6 +7,7 @@ import { useViewport } from '~/utils/ViewportProvider';
 
 import s from './JuicyDishes.module.css';
 import { TabletJuicyDishes } from './TabletJuicyDishes/TabletJuicyDishes';
+import { useBreadcrumb } from '~/utils/BreadcrumbsContext';
 
 const cards = [
     {
@@ -71,8 +72,10 @@ const cards = [
 export const JuicyDishes = () => {
     const navigate = useNavigate();
     const { isMobile, isTablet } = useViewport();
+    const { setBreadcrumbs } = useBreadcrumb();
 
     const handleClick = () => {
+        setBreadcrumbs('Самое сочное', null);
         navigate('./most-juicy');
     };
 
