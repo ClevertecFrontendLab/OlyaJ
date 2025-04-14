@@ -48,7 +48,7 @@ export const VerticalCard = ({
         <div className={s.recipeContainer}>
             <div className={s.categoryContainer}>
                 <div className={s.iconLabelWrapper}>
-                    <img src={icon} width='18' height='18' />
+                    <img src={icon} width='24' height='24' />
                     <div>
                         <button className={s.label}>{category}</button>
                     </div>
@@ -74,7 +74,7 @@ export const VerticalCard = ({
             <div className={s.buttonContainer}>
                 <Button variant='' className={s.saveButton}>
                     <div className={s.saveButtonContainer}>
-                        <img src={bookmarkHeart} /> Сохранить{' '}
+                        <img src={bookmarkHeart} /> Сохранить
                     </div>
                 </Button>
                 <Button variant='' className={s.cookButton}>

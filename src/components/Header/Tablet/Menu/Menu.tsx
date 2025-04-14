@@ -32,7 +32,7 @@ export const Menu = ({ isOpen, onClose }: MenuProps) => {
     };
 
     const handleSubItemClick = (categorySlug: string, subSlug: string) => {
-        navigate(`/category/${categorySlug}/${subSlug}`);
+        navigate(`/${categorySlug}/${subSlug}`);
         onClose();
     };
 

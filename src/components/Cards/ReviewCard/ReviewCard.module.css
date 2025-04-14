@@ -5,7 +5,7 @@
     border: 1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08));
     background: var(--white, #fff);
     gap: 16px;
-    padding: 24px;
+    padding: 22px;
     height: 184px;
     max-width: 426px;
     width: 100%;
@@ -22,8 +22,8 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background-color: gray;
 }
+
 
 .nameEmailContainar {
     display: flex;
@@ -54,7 +54,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    height: 64px;
+    height: 66px;
     align-self: stretch;
 
     display: -webkit-box;
@@ -81,7 +81,6 @@
     }
 
     .text {
-        height: 64px;
         color: var(--black, #000);
         white-space: normal;
         display: -webkit-box;

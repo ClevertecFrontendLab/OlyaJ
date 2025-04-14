@@ -44,6 +44,11 @@
 }
 
 @media (max-width: 768px) {
+    .scroll {
+        display: flex;
+        gap: 12px;
+    }
+
     .arrowLeft,
     .arrowRight {
         display: none;

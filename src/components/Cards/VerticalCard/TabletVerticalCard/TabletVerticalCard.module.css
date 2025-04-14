@@ -6,15 +6,49 @@
     background: var(--white, #fff);
     overflow: hidden;
     position: relative;
-    width: 356px;
+    width: 348px;
     height: 128px;
+}
+
+.image{
+    width:158px;
+    height:128px; 
+}
+
+.labelContainer{
+    height:24px;
+    display: flex;
+    position: absolute;
+    top:8px;
+    left:8px;
+    align-items: center;
+    border-radius: 4px;
+    background: var(--Lime-50, #FFFFD3);
+    gap:2px;
 }
 
 .titleContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 8px;
+    margin: 12px;
+    gap:4px;
+}
+
+.title {
+    color: var(--black, #000);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+
+    width:172px;
+    height:48px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;          
+    -webkit-box-orient: vertical;  
 }
 
 .informationContainer {
@@ -26,26 +60,16 @@
 .buttonTabletContainer {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 10px;
     position: absolute;
-    bottom: 8px;
-    right: 8px;
+    bottom: 6px;
+    right: 6px;
 }
 
-.cookTabletButton {
-    border-radius: 6px;
-    background: var(--blackAlpha-900, rgba(0, 0, 0, 0.92));
-    color: var(--white, #fff);
-}
-
-.saveTabletButton {
-    border-radius: 6px;
-    border: 1px solid var(--blackAlpha-600, rgba(0, 0, 0, 0.48));
-    background: var(--whiteAlpha-100, rgba(255, 255, 255, 0.06));
-}
 
 @media (max-width: 360px) {
-    .container {
-        width: 328px;
+    .title {
+        width:146px;
     }
+    
 }

@@ -80,7 +80,7 @@ export const TabletJuicyDishes = ({ onClick }: TabletJuicyDishesType) => {
                 </div>
             </div>
             <Button variant='' className={s.mobileButton} onClick={handleClick}>
-                Вся подборка →{' '}
+                Вся подборка →
             </Button>
         </div>
     );

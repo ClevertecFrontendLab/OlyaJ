@@ -11,14 +11,14 @@
     gap: 12px;
     margin-top: 32px;
     width: 100%;
-    max-width: 728px;
+    max-width: 734px;
     overflow-x: hidden;
 }
 
 .cardsContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap:12px;
 }
 
 .mobileButton {
@@ -30,15 +30,12 @@
 
 @media (max-width: 360px) {
     .wrapper {
-        width: 360px;
-        align-items: center;
-    }
-
-    .cardsContainer {
-        gap: 12px;
+        width: 328px; 
     }
 
     .container {
         max-width: 360px;
     }
+
+   
 }
