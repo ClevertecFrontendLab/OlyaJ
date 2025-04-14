@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 
 import bookmarkHeart from '/bookmarkHeart.svg';
 import heartEyes from '/heartEyes.svg';
@@ -29,8 +29,9 @@ export const TabletVerticalCard = ({
 }: TabletVerticalCardType) => (
     <div className={s.container}>
         <img src={image} alt='image' className={s.image} />
-        <div className={styles.labelContainer}>
-            <img src={icon} width='16' height='16' />
+       
+        <div className={s.labelContainer}>
+            <img src={icon} width='18' height='18' />
             <div>
                 <button className={styles.label}>{category}</button>
             </div>
@@ -49,16 +50,39 @@ export const TabletVerticalCard = ({
                         <span className={styles.number}>{savesCount}</span>
                     </div>
                 </div>
-                <span className={styles.title}>{title}</span>
+                <span className={s.title}>{title}</span>
             </div>
             <div className={s.buttonTabletContainer}>
-                <Button variant='' size='sm' className={s.saveTabletButton}>
-                    <img src={bookmarkHeart} width='12' height='12' />
+                <Button
+                    variant=""
+                    width="24px"
+                    height="24px"
+                    minWidth="24px"
+                    minHeight="24px"
+                    padding="0"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    border-radius="6px"
+                    border="1px solid var(--blackAlpha-600, rgba(0, 0, 0, 0.48))"
+                >
+                    <Box as="img" src={bookmarkHeart} width="12px" height="12px" />
                 </Button>
-                <Button variant='' fontSize='12px' size='sm' className={s.cookTabletButton}>
+
+                <Button
+                    variant=""
+                    height="24px"
+                    width="70px"
+                    border-radius="6px"
+                    background="var(--blackAlpha-900, rgba(0, 0, 0, 0.92))"
+                    color="var(--white, #fff)"
+                    fontSize="12px"
+
+                >
                     Готовить
                 </Button>
             </div>
+
         </div>
     </div>
 );

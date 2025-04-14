@@ -18,7 +18,7 @@
 .cardsContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap:12px;
 }
 
 .mobileButton {
@@ -31,10 +31,6 @@
 @media (max-width: 360px) {
     .wrapper {
         width: 328px; 
-    }
-
-    .cardsContainer {
-        gap: 12px;
     }
 
     .container {

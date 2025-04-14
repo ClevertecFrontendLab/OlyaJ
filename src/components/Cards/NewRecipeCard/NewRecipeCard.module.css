@@ -147,6 +147,7 @@
     .recipeCard.expanded .labelContainer {
         left: 8px;
         top: 150px;
+        background: var(--Lime-50, #FFFFD3);
     }
 
     .recipeCard.expanded .iconsContainer {
@@ -165,6 +166,7 @@
     .recipeCard.expanded .labelContainer {
         left: 8px;
         top: 135px;
+        background: var(--Lime-50, #FFFFD3);
     }
 
     .recipeCard.expanded .title {
