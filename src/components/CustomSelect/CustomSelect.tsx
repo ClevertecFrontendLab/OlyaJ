@@ -104,6 +104,7 @@ export const CustomSelect = ({
                 variant='outline'
                 whiteSpace='normal'
                 height='auto'
+                zIndex='100'
                 py={2}
                 bg='#FFFFF'
                 borderColor={isActive ? '#2DB100' : '#E2E8F0'}
