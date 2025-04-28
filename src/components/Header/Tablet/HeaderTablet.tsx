@@ -1,10 +1,8 @@
-
 import { Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import bookmarkHeart from '/bookmarkHeart.svg';
-import burger from '/burger.svg';
 import heartEyes from '/heartEyes.svg';
 import logo from '/logo.svg';
 import logoMobile from '/logoMobile.svg';
@@ -14,8 +12,7 @@ import { useViewport } from '~/utils/ViewportProvider';
 
 import s from './HeaderTablet.module.css';
 import { Menu } from './Menu/Menu';
-
-
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 export type HeaderTabletProps = {
     isSaved?: boolean;
@@ -38,8 +35,11 @@ export const HeaderTablet = ({
     const [menuOpen, setMenuOpen] = useState(false);
     const { isMobile } = useViewport();
 
+    console.log('HeaderTablet RENDERED', { menuOpen, isMobile });
+
     return (
-        <header className={s.container} data-test-id='header'>
+        <header className={menuOpen ? s.headerOpenMenu : s.container} data-test-id='header'>
+            {/* Лого */}
             {isMobile ? (
                 <Button variant='' onClick={() => navigate('/')}>
                     <img src={logoMobile} alt='Logo' width='32' height='32' />
@@ -49,7 +49,9 @@ export const HeaderTablet = ({
                     <img src={logo} alt='Logo' width='135' height='32' />
                 </Button>
             )}
-            <div className={s.wrapper}>
+
+            {/* Иконки */}
+            {!menuOpen && (
                 <div className={s.icons}>
                     {isSaved && (
                         <div className={s.icon}>
@@ -70,11 +72,18 @@ export const HeaderTablet = ({
                         </div>
                     )}
                 </div>
-                <Button variant='' onClick={() => setMenuOpen(true)}>
-                    <img src={burger} />
-                </Button>
-                <Menu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-            </div>
+            )}
+
+            {!menuOpen && (
+                <HamburgerIcon
+                    data-test-id='hamburger-icon'
+                    onClick={() => setMenuOpen(true)}
+                    marginRight={'16px'}
+                />
+            )}
+
+            {/* Меню */}
+            {menuOpen && <Menu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />}
         </header>
     );
 };

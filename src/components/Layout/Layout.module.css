@@ -8,7 +8,8 @@
     display: flex;
     justify-content: center;
     flex: 1;
-    padding-top: 120px;
+    padding-top: 100px;
+    padding-bottom: 80px;
 }
 
 .content {
@@ -25,7 +26,6 @@
 
     .content {
         width: 768px;
-      
     }
 }
 

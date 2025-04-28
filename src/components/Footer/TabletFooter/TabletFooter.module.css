@@ -9,6 +9,7 @@
     background: var(--Lime-50, #ffffd3);
     position: fixed;
     bottom: 0;
+    z-index: 10000;
 }
 
 .iconContainer {

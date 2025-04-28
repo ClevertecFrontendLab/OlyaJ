@@ -16,6 +16,8 @@
     flex-direction: row;
     align-items: center;
     gap: 12px;
+    position: absolute;
+    right: 70px;
 }
 
 .icon {
@@ -24,15 +26,26 @@
     gap: 2px;
 }
 
-.wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-}
-
 .number {
     color: var(--Lime-600, #2db100);
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
+}
+
+.headerOpenMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    width: 768px;
+    background-color: #fff;
+    padding: 20px 16px;
+}
+
+@media (max-width: 360px) {
+    .headerOpenMenu {
+        width: 360px;
+    }
 }

@@ -1,12 +1,13 @@
 import { createBrowserRouter, Outlet, RouteObject } from 'react-router-dom';
+import { CategoryPage } from '~/components/CategoryPage/CategoryPage';
 
 import Layout from '~/components/Layout/Layout';
 import { Main } from '~/pages/Main/Main';
 import { MostJuicy } from '~/pages/MostJuicy/MostJuicy';
 import { NotFound } from '~/pages/NotFound/NotFound';
-import { VeganSecondDishes } from '~/pages/Vegan/VeganSecondDishes';
+import { RecipePage } from '~/pages/RecipePage/RecipePage';
 
-export const routes: RouteObject[] = [
+const routes: RouteObject[] = [
     {
         path: '/',
         element: <Layout />,
@@ -16,19 +17,39 @@ export const routes: RouteObject[] = [
                 element: <Main />,
             },
             {
-                path: 'most-juicy',
-                element: <MostJuicy />,
-            },
-            {
-                path: 'vegan',
-                element: <Outlet />,
+                path: 'the-juiciest',
                 children: [
                     {
-                        path: 'vtorye-blyuda',
-                        element: <VeganSecondDishes />,
+                        index: true,
+                        element: <MostJuicy />,
+                    },
+                    {
+                        path: ':id',
+                        element: <RecipePage />,
                     },
                 ],
             },
+            {
+                path: ':category',
+                element: <Outlet />,
+                children: [
+                    {
+                        path: ':subcategory',
+                        element: <Outlet />,
+                        children: [
+                            {
+                                index: true,
+                                element: <CategoryPage />,
+                            },
+                            {
+                                path: ':id',
+                                element: <RecipePage />,
+                            },
+                        ],
+                    },
+                ],
+            },
+
             {
                 path: '*',
                 element: <NotFound />,
