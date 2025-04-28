@@ -7,11 +7,14 @@ import { SectionHeader } from '~/components/SectionHeader/SectionHeader';
 import { useViewport } from '~/utils/ViewportProvider';
 
 import s from './MostJuicy.module.css';
+import { useBreadcrumb } from '~/utils/BreadcrumbsContext';
+import { useEffect, useState } from 'react';
 
 const cards = [
     {
         image: '/images/mostJuicy/image1.png',
         title: 'Лапша с курицей и шафраном',
+        id: '7',
         description:
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: 'Вторые блюда',
@@ -39,6 +42,7 @@ const cards = [
     },
 
     {
+        id: '8',
         image: '/images/mostJuicy/image3.png',
         title: 'Пряная ветчина по итальянски',
         description:
@@ -154,32 +158,47 @@ const lineCards = [
 
 export const MostJuicy = () => {
     const { isMobile, isTablet } = useViewport();
+    const { setBreadcrumbs } = useBreadcrumb();
+    const [searchValue, setSearchValue] = useState('');
+
+    useEffect(() => {
+        setBreadcrumbs({
+            accordion: 'Самое сочное',
+        });
+    }, []);
+
+    const filteredCards = cards.filter((card) =>
+        card.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
 
     return (
         <div className={s.container}>
-            <SectionHeader title='Самое сочное' />
+            <SectionHeader
+                title='Самое сочное'
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+            />
             <div className={s.cardsContainer}>
-                {cards.map((card, index) => {
-                    const props = {
-                        key: index,
-                        image: card.image,
-                        title: card.title,
-                        description: card.description,
-                        category: card.category,
-                        isSaved: card.isSaved,
-                        savesCount: card.savesCount,
-                        isLiked: card.isLiked,
-                        likesCount: card.likesCount,
-                        recommended: card.recommended,
-                        name: card.name,
-                        avatar: card.avatar,
-                        icon: card.icon,
-                    };
-
-                    return isTablet || isMobile ? (
-                        <TabletVerticalCard {...props} />
-                    ) : (
-                        <VerticalCard {...props} />
+                {filteredCards.map((card, i) => {
+                    const CardComponent = isTablet || isMobile ? TabletVerticalCard : VerticalCard;
+                    return (
+                        <CardComponent
+                            id={card.id}
+                            i={i}
+                            image={card.image}
+                            title={card.title}
+                            description={card.description}
+                            category={card.category}
+                            isSaved={card.isSaved}
+                            savesCount={card.savesCount}
+                            isLiked={card.isLiked}
+                            likesCount={card.likesCount}
+                            recommended={card.recommended}
+                            name={card.name}
+                            avatar={card.avatar}
+                            icon={card.icon}
+                            searchValue={searchValue}
+                        />
                     );
                 })}
             </div>

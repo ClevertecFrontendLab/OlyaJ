@@ -56,7 +56,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap:4px;
+    gap: 4px;
 }
 
 .label {
@@ -69,7 +69,6 @@
     padding-right: 4px;
     gap: 8px;
     cursor: default;
-    width: 100%;
 }
 
 .iconLabelWrapper {
@@ -122,7 +121,7 @@
     }
 
     .title {
-        width:208px;
+        width: 142px;
     }
 
     .descriptionContainer {
@@ -148,13 +147,17 @@
     .recipeCard.expanded .labelContainer {
         left: 8px;
         top: 150px;
-        background: var(--Lime-50, #FFFFD3);
+        background: var(--Lime-50, #ffffd3);
     }
 
     .recipeCard.expanded .iconsContainer {
         position: absolute;
         bottom: 10px;
         right: 8px;
+    }
+
+    .recipeCard.expanded .title {
+        width: 200px;
     }
 }
 
@@ -167,10 +170,10 @@
     .recipeCard.expanded .labelContainer {
         left: 8px;
         top: 135px;
-        background: var(--Lime-50, #FFFFD3);
+        background: var(--Lime-50, #ffffd3);
     }
 
     .recipeCard.expanded .title {
-       width:304px;
+        width: 304px;
     }
 }

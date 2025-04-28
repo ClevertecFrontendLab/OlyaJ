@@ -1,32 +1,42 @@
 import { createContext, useContext, useState } from 'react';
 
-interface BreadcrumbContextType {
-    activeAccordion: string | null;
-    setActiveAccordion: (value: string | null) => void;
-    activeSubItem: string | null;
-    setActiveSubItem: (value: string | null) => void;
-    setBreadcrumbs: (accordion: string | null, subItem: string | null) => void; // ← Добавляем это
-}
+type BreadcrumbData = {
+    accordion: string | null;
+    subItem: string | null;
+    tab: string | null;
+    title?: string | null;
+};
+
+type BreadcrumbContextType = {
+    breadcrumb: BreadcrumbData;
+    setBreadcrumbs: (data: Partial<BreadcrumbData>) => void;
+    resetBreadcrumbs: () => void;
+};
 
 const BreadcrumbContext = createContext<BreadcrumbContextType | undefined>(undefined);
 
 export const BreadcrumbProvider = ({ children }: { children: React.ReactNode }) => {
-    const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
-    const [activeSubItem, setActiveSubItem] = useState<string | null>(null);
+    const [breadcrumb, setBreadcrumb] = useState<BreadcrumbData>({
+        accordion: null,
+        subItem: null,
+        tab: null,
+        title: null,
+    });
 
-    const setBreadcrumbs = (accordion: string | null, subItem: string | null) => {
-        setActiveAccordion(accordion);
-        setActiveSubItem(subItem);
+    const setBreadcrumbs = (data: Partial<BreadcrumbData>) => {
+        setBreadcrumb((prev) => ({ ...prev, ...data }));
+    };
+
+    const resetBreadcrumbs = () => {
+        setBreadcrumb({ accordion: null, subItem: null, tab: null, title: null });
     };
 
     return (
         <BreadcrumbContext.Provider
             value={{
-                activeAccordion,
-                setActiveAccordion,
-                activeSubItem,
-                setActiveSubItem,
+                breadcrumb,
                 setBreadcrumbs,
+                resetBreadcrumbs,
             }}
         >
             {children}

@@ -4,8 +4,13 @@ import bookmarkHeart from '/bookmarkHeart.svg';
 import heartEyes from '/heartEyes.svg';
 
 import s from './VerticalCard.module.css';
+import { Link } from 'react-router-dom';
+import { highlightMatch } from '~/utils/HighlightMatch';
 
 type VerticalCardType = {
+    id?: string;
+    categorySlug?: string;
+    subcategorySlug?: string;
     image: string;
     recommended?: boolean;
     name?: string;
@@ -18,9 +23,12 @@ type VerticalCardType = {
     description: string;
     avatar?: string;
     icon?: string;
+    searchValue?: string;
+    i?: number;
 };
 
 export const VerticalCard = ({
+    id,
     image,
     recommended,
     name,
@@ -32,9 +40,13 @@ export const VerticalCard = ({
     title,
     description,
     avatar,
+    searchValue,
     icon,
+    i,
+    categorySlug,
+    subcategorySlug,
 }: VerticalCardType) => (
-    <div className={s.contaner}>
+    <div className={s.contaner} data-test-id={`food-card-${i}`}>
         <div className={s.imageContainer}>
             <img src={image} alt='image' className={s.image} />
             {recommended && (
@@ -67,7 +79,19 @@ export const VerticalCard = ({
                 </div>
             </div>
             <div className={s.descriptionContainer}>
-                <span className={s.title}>{title}</span>
+                <Link
+                    to={
+                        categorySlug && subcategorySlug
+                            ? `/${categorySlug}/${subcategorySlug}/${id}`
+                            : `/the-juiciest/${id}`
+                    }
+                    className={s.titleLink}
+                >
+                    <span className={s.title}>
+                        {searchValue ? highlightMatch(title, searchValue) : title}
+                    </span>
+                </Link>
+
                 <p className={s.description}>{description}</p>
             </div>
 
@@ -77,9 +101,19 @@ export const VerticalCard = ({
                         <img src={bookmarkHeart} /> Сохранить
                     </div>
                 </Button>
-                <Button variant='' className={s.cookButton}>
-                    Готовить
-                </Button>
+
+                <Link
+                    to={
+                        categorySlug && subcategorySlug
+                            ? `/${categorySlug}/${subcategorySlug}/${id}`
+                            : `/the-juiciest/${id}`
+                    }
+                    className={s.cookButtonLink}
+                >
+                    <Button variant='' className={s.cookButton} data-test-id={`card-link-${i}`}>
+                        Готовить
+                    </Button>
+                </Link>
             </div>
         </div>
     </div>

@@ -7,13 +7,15 @@ import {
     Box,
     Text,
     VStack,
+    useMediaQuery,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import { useBreadcrumb } from '~/utils/BreadcrumbsContext';
 
 import s from './Sidebar.module.css';
+import clsx from 'clsx';
 
 export const menuItems = [
     {
@@ -29,7 +31,7 @@ export const menuItems = [
     },
     {
         title: 'Закуски',
-        slug: 'snacks',
+        slug: 'zakuski',
         icon: '/sidebar/snacks.png',
         subItems: [
             { title: 'Мясные закуски', slug: 'myasnye-zakuski' },
@@ -109,9 +111,9 @@ export const menuItems = [
         slug: 'vegan',
         icon: '/sidebar/vegan.png',
         subItems: [
-            { title: 'Закуски', slug: 'zakuski' },
+            { title: 'Закуски', slug: 'snacks' },
             { title: 'Первые блюда', slug: 'pervye-blyuda' },
-            { title: 'Вторые блюда', slug: 'vtorye-blyuda' },
+            { title: 'Вторые блюда', slug: 'second-dish' },
             { title: 'Гарниры', slug: 'garniry' },
             { title: 'Десерты', slug: 'deserty' },
             { title: 'Выпечка', slug: 'vypechka' },
@@ -224,13 +226,25 @@ export const menuItems = [
 ];
 
 export const Sidebar = () => {
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const { setActiveAccordion: setBreadcrumbAccordion, setActiveSubItem } = useBreadcrumb();
+    const [isMobile] = useMediaQuery('(max-width: 768px)');
+    const { setBreadcrumbs } = useBreadcrumb();
+    const navigate = useNavigate();
+    const { category, subcategory } = useParams();
+    const activeIndex = menuItems.findIndex((item) => item.slug === category);
 
-    const handleAccordionClick = (index: number, itemTitle: string) => {
-        setActiveIndex(activeIndex === index ? null : index);
-        setBreadcrumbAccordion(activeIndex === index ? null : itemTitle);
-        setActiveSubItem(null);
+    const [expandedIndex, setExpandedIndex] = useState<number[]>(
+        activeIndex >= 0 ? [activeIndex] : [],
+    );
+
+    useEffect(() => {
+        setExpandedIndex(activeIndex >= 0 ? [activeIndex] : []);
+    }, [activeIndex]);
+
+    const handleClick = (item: (typeof menuItems)[number]) => {
+        if (item.subItems?.length > 0) {
+            navigate(`${item.slug}/${item.subItems[0].slug}`);
+            setBreadcrumbs({ accordion: item.title, subItem: item.subItems[0].title, title: null });
+        }
     };
 
     return (
@@ -238,21 +252,20 @@ export const Sidebar = () => {
             <Box className={s.scrollableContent}>
                 <VStack align='stretch' w='100%'>
                     <Accordion
-                        index={activeIndex !== null ? [activeIndex] : []}
+                        index={expandedIndex}
                         onChange={(index) => {
-                            if (typeof index === 'number') {
-                                handleAccordionClick(index, menuItems[index].title);
-                            } else {
-                                setActiveIndex(null);
-                                setBreadcrumbAccordion(null);
-                            }
+                            const newIndex = Array.isArray(index) ? index : [index];
+                            setExpandedIndex(newIndex);
                         }}
+                        allowToggle
                     >
                         {menuItems.map((item, index) => (
                             <AccordionItem key={item.slug} border='none'>
                                 <h2>
                                     <AccordionButton
-                                        onClick={() => handleAccordionClick(index, item.title)}
+                                        as='div'
+                                        cursor='pointer'
+                                        onClick={() => handleClick(item)}
                                         _hover={{ backgroundColor: '#EAFFC7' }}
                                         backgroundColor={
                                             activeIndex === index ? '#EAFFC7' : 'transparent'
@@ -260,7 +273,9 @@ export const Sidebar = () => {
                                         fontWeight={600}
                                         fontSize={16}
                                         data-test-id={
-                                            item.slug === 'vegan' ? 'vegan-cuisine' : undefined
+                                            !isMobile && item.slug === 'vegan'
+                                                ? 'vegan-cuisine'
+                                                : undefined
                                         }
                                     >
                                         <Box
@@ -282,16 +297,33 @@ export const Sidebar = () => {
                                 </h2>
                                 <AccordionPanel>
                                     <VStack align='start' spacing={2}>
-                                        {item.subItems.map((subItem) => (
-                                            <RouterLink
-                                                to={`/${item.slug}/${subItem.slug}`}
-                                                key={subItem.slug}
-                                                className={s.submenuItem}
-                                                onClick={() => setActiveSubItem(subItem.title)}
-                                            >
-                                                {subItem.title}
-                                            </RouterLink>
-                                        ))}
+                                        {item.subItems.map((subItem, i) => {
+                                            const isActiveSub =
+                                                `/${category}/${subcategory}` ===
+                                                `/${item.slug}/${subItem.slug}`;
+
+                                            return (
+                                                <NavLink
+                                                    key={subItem.slug}
+                                                    to={`/${item.slug}/${subItem.slug}`}
+                                                    className={({ isActive }) =>
+                                                        clsx(s.submenuItem, {
+                                                            [s.active]: isActive,
+                                                        })
+                                                    }
+                                                    onClick={() =>
+                                                        setBreadcrumbs({ subItem: subItem.title })
+                                                    }
+                                                    data-test-id={
+                                                        isActiveSub
+                                                            ? `${subItem.slug}-active`
+                                                            : `sidebar-tab-${subItem.slug}-${i}`
+                                                    }
+                                                >
+                                                    {subItem.title}
+                                                </NavLink>
+                                            );
+                                        })}
                                     </VStack>
                                 </AccordionPanel>
                             </AccordionItem>

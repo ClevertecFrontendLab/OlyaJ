@@ -1,51 +1,65 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin-top: 54px;
-    gap: 12px;
-    position: relative;
-}
-
-.wrapper {
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
-}
-
-.scroll {
-    display: flex;
+    margin-top: 44px;
     gap: 24px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 16px;
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    position: relative;
+    max-width: 1360px;
 }
 
-.scroll::-webkit-scrollbar {
-    display: none;
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding-bottom: 16px;
+}
+
+.swiperWrapper {
+    position: relative;
+    padding-bottom: 16px;
 }
 
 .arrowLeft,
 .arrowRight {
     position: absolute;
-    top: 150px;
+    top: 45%;
     z-index: 10;
     cursor: pointer;
+    width: 48px;
+    height: 48px;
 }
 
 .arrowLeft {
-    left: -20px;
+    left: -12px;
 }
 
 .arrowRight {
-    right: -20px;
+    right: -12px;
 }
 
 @media (max-width: 768px) {
-    .scroll {
-        display: flex;
+    .container {
+        gap: 12px;
+        width: 768px;
+    }
+
+    .cardsContainer {
+        gap: 100px;
+    }
+
+    .arrowLeft,
+    .arrowRight {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        gap: 12px;
+        width: 360px;
+    }
+
+    .cardsContainer {
         gap: 12px;
     }
 

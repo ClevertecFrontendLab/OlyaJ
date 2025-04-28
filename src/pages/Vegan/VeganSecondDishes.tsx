@@ -1,122 +1,66 @@
 import { Button } from '@chakra-ui/react';
-
+import { useEffect, useState } from 'react';
 import { TabletVerticalCard } from '~/components/Cards/VerticalCard/TabletVerticalCard/TabletVerticalCard';
 import { VerticalCard } from '~/components/Cards/VerticalCard/VerticalCard';
 import { Footer } from '~/components/Footer/Footer';
 import { SectionHeader } from '~/components/SectionHeader/SectionHeader';
 import { useViewport } from '~/utils/ViewportProvider';
-
+import { RecipeTabs } from '~/components/Tabs';
+import { veganRecipes, veganSnacks } from '~/data/recipes';
 import s from './VeganSecondDishes.module.css';
-import { VeganCategoryTabs } from './VeganSubcategoryTabs/VeganSubcategoryTabs';
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+const iconMap = {
+    'second-dish': '/sidebar/secondDish.png',
+    snacks: '/sidebar/snacks.png',
+    'side-dishes': '/sidebar/garnish.png',
+    national: '/sidebar/national.png',
+    'warm-snacks': '/sidebar/grill.png',
+};
 
 export const VeganSecondDishes = () => {
     const { isMobile, isTablet } = useViewport();
+    const [searchValue, setSearchValue] = useState('');
+    const { subcategory } = useParams<{ category: string; subcategory: string }>();
+    const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
+    const location = useLocation();
+    const selectedGarnish =
+        (location.state as { selectedGarnish: string[] })?.selectedGarnish || [];
+    const allergensFromLocation =
+        (location.state as { selectedAllergens: string[] })?.selectedAllergens || [];
 
-    const cards = [
-        {
-            image: '/images/vegan/image1.jpg',
-            title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',
-            description:
-                'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, -  вариант сытного блюда на каждый день',
-            category: 'Национальные',
-            icon: '/sidebar/secondDish.png',
-            isSaved: true,
-            savesCount: 85,
-            isLiked: true,
-            likesCount: 152,
-        },
+    const isSnacks = subcategory === 'snacks';
 
-        {
-            image: '/images/vegan/image2.jpg',
-            title: 'Картофельные рулетики с грибами',
-            description:
-                'Рекомендую всем приготовить постное блюдо из картофеля и грибов.  Готовится это блюдо без яиц, без мяса и без сыра, из самых простых  ингредиентов, а получается очень вкусно и сытно. Постный рецепт  картофельных рулетиков с грибами, в томатном соусе, - на обед, ужин и  даже на праздничный стол!',
-            category: 'Детские блюда',
-            icon: '/sidebar/kids.png',
-            isSaved: true,
-            savesCount: 85,
-            isLiked: true,
-            likesCount: 152,
-        },
+    const selectedRecipes = isSnacks ? veganSnacks : veganRecipes;
 
-        {
-            image: '/images/vegan/image3.jpg',
-            title: 'Том-ям с капустой кимчи',
-            description:
-                'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-            category: 'Национальная',
-            icon: '/sidebar/national.png',
-            isSaved: true,
-            savesCount: 124,
-            isLiked: true,
-            likesCount: 324,
-        },
+    useEffect(() => {
+        if (allergensFromLocation.length > 0) {
+            setSelectedAllergens(allergensFromLocation);
+        }
+    }, [allergensFromLocation]);
 
-        {
-            image: '/images/vegan/image4.jpg',
-            title: 'Овощная лазанья из лаваша',
-            description:
-                'Большое, сытное блюдо для ценителей блюд без мяса! Такая лазанья  готовится с овощным соусом и соусом бешамель, а вместо листов для  лазаньи используется тонкий лаваш.',
-            category: 'Блюда на гриле',
-            icon: '/sidebar/grill.png',
-            isSaved: true,
-            savesCount: 85,
-            isLiked: true,
-            likesCount: 152,
-        },
+    const cards = selectedRecipes.map((recipe) => {
+        const categorySlug = recipe.category?.[0] || 'vegan';
+        const subcategorySlug = recipe.subcategory?.[0] || 'snacks';
+        const icon = iconMap[subcategorySlug] || iconMap[categorySlug] || '/sidebar/secondDish.png';
 
-        {
-            image: '/images/vegan/image5.jpg',
-            title: 'Тефтели из булгура и чечевицы, запечённые в томатном соусе',
-            description:
-                'Тефтели из булгура и чечевицы – яркие и питательные, отлично подходят  для постного и вегетарианского меню. Тефтели получаются нежными, а также сочными и ароматными благодаря использованию томатного соуса и душистых пряностей.',
+        return {
+            id: recipe.id,
+            image: recipe.image,
+            title: recipe.title,
+            description: recipe.description,
             category: 'Вторые блюда',
-            icon: '/sidebar/secondDish.png',
+            categorySlug,
+            subcategorySlug,
+            icon,
             isSaved: true,
-            savesCount: 85,
+            savesCount: recipe.bookmarks,
             isLiked: true,
-            likesCount: 152,
-        },
-
-        {
-            image: '/images/vegan/image5.jpg',
-            title: 'Тефтели из булгура и чечевицы, запечённые в томатном соусе',
-            description:
-                'Тефтели из булгура и чечевицы – яркие и питательные, отлично подходят  для постного и вегетарианского меню. Тефтели получаются нежными, а также сочными и ароматными благодаря использованию томатного соуса и душистых пряностей.',
-            category: 'Вторые блюда',
-            icon: '/sidebar/secondDish.png',
-            isSaved: true,
-            savesCount: 85,
-            isLiked: true,
-            likesCount: 152,
-        },
-
-        {
-            image: '/images/vegan/image6.jpg',
-            title: 'Чесночная картошка',
-            description:
-                'Такая картошечка украсит любой семейный обед! Все будут в полном  восторге, очень вкусно! Аромат чеснока, хрустящая корочка на картошечке - просто объедение! Отличная идея для обеда или ужина, готовится просто!',
-            category: 'Национальные',
-            icon: '/sidebar/grill.png',
-            isSaved: true,
-            savesCount: 124,
-            isLiked: true,
-            likesCount: 324,
-        },
-
-        {
-            image: '/images/vegan/image7.jpg',
-            title: 'Пури',
-            description:
-                'Пури - это индийские жареные лепешки, которые готовятся из пресного  теста. Рецепт лепешек пури требует самых доступных ингредиентов, и  времени на приготовление хрустящих лепешек уйдет мало. ',
-            category: 'Национальные',
-            icon: '/sidebar/national.png',
-            isSaved: true,
-            savesCount: 124,
-            isLiked: true,
-            likesCount: 324,
-        },
-    ];
+            likesCount: recipe.likes,
+            ingredients: recipe.ingredients || [],
+        };
+    });
 
     const footerCards = [
         {
@@ -130,7 +74,6 @@ export const VeganSecondDishes = () => {
             isSaved: true,
             savesCount: 1,
         },
-
         {
             title: 'Нежный сливочно-сырный крем для кексов',
             description:
@@ -150,42 +93,75 @@ export const VeganSecondDishes = () => {
         { title: 'Воздушное банановое печенье на сковороде', icon: '/sidebar/vegan.png' },
     ];
 
+    const tabs = [
+        { title: 'Закуски', slug: 'snacks' },
+        { title: 'Первые блюда', slug: 'pervye-blyuda' },
+        { title: 'Вторые блюда', slug: 'second-dish' },
+        { title: 'Гарниры', slug: 'garniry' },
+        { title: 'Десерты', slug: 'deserty' },
+        { title: 'Выпечка', slug: 'vypechka' },
+        { title: 'Сыроедческие блюда', slug: 'syroedcheskie-blyuda' },
+        { title: 'Напитки', slug: 'napitki' },
+    ];
+
+    const filteredCards = cards.filter((card) => {
+        const matchesSearch = card.title.toLowerCase().includes(searchValue.toLowerCase());
+
+        const noSelectedAllergens =
+            selectedAllergens.length === 0 ||
+            !card.ingredients.some((ingredient) =>
+                selectedAllergens.some((allergen) =>
+                    ingredient.title.toLowerCase().includes(allergen.toLowerCase()),
+                ),
+            );
+
+        const matchesGarnish =
+            selectedGarnish.length === 0 ||
+            card.ingredients.some((ingredient) =>
+                selectedGarnish.some((garnish) =>
+                    ingredient.title.toLowerCase().includes(garnish.toLowerCase()),
+                ),
+            );
+
+        return matchesSearch && noSelectedAllergens && matchesGarnish;
+    });
+
     return (
         <div className={s.container}>
             <SectionHeader
                 title='Веганская кухня'
-                description='Интересны не только убеждённым вегетарианцам, но и тем, кто хочет  попробовать вегетарианскую диету и готовить вкусные  вегетарианские блюда.'
+                description='Интересны не только убеждённым вегетарианцам...'
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                allergens={selectedAllergens}
+                setAllergens={setSelectedAllergens}
             />
 
-            <VeganCategoryTabs />
+            <RecipeTabs tabs={tabs} />
             <div className={s.cardsContainer}>
-                {cards.map((card, index) => {
-                    const props = {
-                        key: index,
-                        image: card.image,
-                        title: card.title,
-                        description: card.description,
-                        category: card.category,
-                        isSaved: card.isSaved,
-                        savesCount: card.savesCount,
-                        isLiked: card.isLiked,
-                        likesCount: card.likesCount,
-                        icon: card.icon,
-                    };
+                {filteredCards.map((card, i) => {
+                    const CardComponent = isTablet || isMobile ? TabletVerticalCard : VerticalCard;
 
-                    return isTablet || isMobile ? (
-                        <TabletVerticalCard {...props} />
-                    ) : (
-                        <VerticalCard {...props} />
+                    return (
+                        <div key={i}>
+                            <CardComponent
+                                {...card}
+                                searchValue={searchValue}
+                                i={i}
+                                data-test-id={`food-card-${i}`}
+                            />
+                        </div>
                     );
                 })}
             </div>
+
             <Button variant='' className={s.button}>
                 Загрузить еще
             </Button>
+
             <Footer
                 title='Десерты, выпечка'
-                text='Без них невозможно представить себе ни современную, ни традиционную  кулинарию. Пироги и печенья, блины, пончики, вареники и, конечно, хлеб - рецепты изделий из теста многообразны и невероятно популярны.'
+                text='Без них невозможно представить себе ни современную, ни традиционную кулинарию. Пироги и печенья, блины, пончики, вареники и, конечно, хлеб - рецепты изделий из теста многообразны и невероятно популярны.'
                 cards={footerCards}
                 lineCards={lineCards}
             />

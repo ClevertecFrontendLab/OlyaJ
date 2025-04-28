@@ -1,4 +1,7 @@
-import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 import blackArrowLeft from '/blackArrowLeft.svg';
 import blackArrowRight from '/blackArrowRight.svg';
@@ -10,18 +13,7 @@ import s from './NewRecipes.module.css';
 
 const newRecipesCards = [
     {
-        withImage: true,
-        image: '/images/newRecipes/image1.webp',
-        title: 'Солянка с грибами',
-        description:
-            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить',
-        category: 'Первые блюда',
-        isSaved: true,
-        savesCount: 1,
-        icon: '/sidebar/firstDish.png',
-    },
-
-    {
+        id: '0',
         withImage: true,
         image: '/images/newRecipes/image2.webp',
         title: 'Капустные котлеты',
@@ -33,6 +25,17 @@ const newRecipesCards = [
         isSaved: true,
         savesCount: 1,
         icon: '/sidebar/vegan.png',
+    },
+    {
+        withImage: true,
+        image: '/images/newRecipes/image1.webp',
+        title: 'Солянка с грибами',
+        description:
+            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить',
+        category: 'Первые блюда',
+        isSaved: true,
+        savesCount: 1,
+        icon: '/sidebar/firstDish.png',
     },
 
     {
@@ -69,6 +72,46 @@ const newRecipesCards = [
 
     {
         withImage: true,
+        image: '/images/vegan/image1.jpg',
+        title: "'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе' ",
+        description:
+            'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, - вариант сытного блюда на каждый...',
+        category: 'Веганская блюда',
+        icon: '/sidebar/salads.png',
+    },
+
+    {
+        withImage: true,
+        image: '/images/vegan/image1.jpg',
+        title: "'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе' ",
+        description:
+            'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, - вариант сытного блюда на каждый...',
+        category: 'Веганская блюда',
+        icon: '/sidebar/salads.png',
+    },
+
+    {
+        withImage: true,
+        image: '/images/vegan/image1.jpg',
+        title: "'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе' ",
+        description:
+            'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, - вариант сытного блюда на каждый...',
+        category: 'Веганская блюда',
+        icon: '/sidebar/salads.png',
+    },
+
+    {
+        withImage: true,
+        image: '/images/newRecipes/image4.webp',
+        title: "Салат 'Здоровье' ",
+        description:
+            'Сельдерей очень полезен для здоровья, пора набираться витаминов. Не  салат, а сплошное удовольствие:) ',
+        category: 'Салаты',
+        icon: '/sidebar/salads.png',
+    },
+
+    {
+        withImage: true,
         image: '/images/newRecipes/image4.webp',
         title: "Салат 'Здоровье' ",
         description:
@@ -78,52 +121,79 @@ const newRecipesCards = [
     },
 ];
 
-export const NewRecipes = () => {
-    const scrollRef = useRef<HTMLDivElement>(null);
+type NewRecipesType = {
+    searchValue: string;
+};
 
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollRef.current) {
-            const scrollAmount = 346;
-            scrollRef.current.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth',
-            });
-        }
-    };
+export const NewRecipes = ({ searchValue }: NewRecipesType) => {
+    const filteredCards = newRecipesCards.filter((card) =>
+        card.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
 
     return (
         <div className={s.container}>
             <SectionTitle title='Новые рецепты' />
-            <div className={s.cards}>
+
+            <div className={s.swiperWrapper}>
                 <img
                     src={blackArrowLeft}
-                    alt='left'
-                    className={s.arrowLeft}
-                    onClick={() => scroll('left')}
+                    alt='prev'
+                    className={`swiper-button-prev ${s.arrowLeft}`}
+                    data-test-id={'carousel-back'}
                 />
-                <div className={s.scroll} ref={scrollRef}>
-                    {newRecipesCards.map((card, index) => (
-                        <NewRecipeCard
-                            key={index}
-                            withImage={card.withImage}
-                            image={card.image}
-                            title={card.title}
-                            description={card.description}
-                            category={card.category}
-                            isSaved={card.isSaved}
-                            savesCount={card.savesCount}
-                            isLiked={card.isLiked}
-                            likesCount={card.likesCount}
-                            icon={card.icon}
-                            showDescription={true}
-                        />
+                <Swiper
+                    data-test-id={'carousel'}
+                    modules={[Navigation]}
+                    loop={true}
+                    navigation={{
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }}
+                    breakpoints={{
+                        360: {
+                            slidesPerView: 2,
+                            spaceBetween: 16,
+                        },
+                        768: {
+                            slidesPerView: 4.2,
+                            spaceBetween: 20,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 24,
+                        },
+                    }}
+                >
+                    {filteredCards.map((card, i) => (
+                        <SwiperSlide key={i} data-test-id={`carousel-card-${i}`}>
+                            <div data-test-id={`food-card-${i}`}>
+                                <NewRecipeCard
+                                    id={card.id}
+                                    withImage={card.withImage}
+                                    image={card.image}
+                                    title={card.title}
+                                    description={card.description}
+                                    category={card.category}
+                                    isSaved={card.isSaved}
+                                    savesCount={card.savesCount}
+                                    isLiked={card.isLiked}
+                                    likesCount={card.likesCount}
+                                    icon={card.icon}
+                                    showDescription={true}
+                                    searchValue={searchValue}
+                                    data-test-id={`food-card-${i}`}
+                                    categorySlug='vegan'
+                                    subcategorySlug='snacks'
+                                />
+                            </div>
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
                 <img
                     src={blackArrowRight}
-                    alt='right'
-                    className={s.arrowRight}
-                    onClick={() => scroll('right')}
+                    alt='next'
+                    className={`swiper-button-next ${s.arrowRight}`}
+                    data-test-id={'carousel-forward'}
                 />
             </div>
         </div>

@@ -6,12 +6,17 @@ import heartEyes from '/heartEyes.svg';
 import { useViewport } from '~/utils/ViewportProvider';
 
 import s from './NewRecipeCard.module.css';
+import { Link } from 'react-router-dom';
+import { highlightMatch } from '~/utils/HighlightMatch';
 
 export type NewRecipeCardType = {
     image?: string;
     title: string;
     description?: string;
     category: string;
+    categorySlug?: string;
+    subcategorySlug?: string;
+    id: string | undefined;
     isLiked?: boolean;
     likesCount?: number;
     isSaved?: boolean;
@@ -20,9 +25,15 @@ export type NewRecipeCardType = {
     icon?: string;
     showDescription?: boolean;
     variant?: 'compact' | 'expanded';
+    searchValue?: string;
+    dataTestId?: string;
 };
 
 export const NewRecipeCard = ({
+    id,
+    categorySlug,
+    subcategorySlug,
+    dataTestId,
     image,
     title,
     description,
@@ -35,70 +46,83 @@ export const NewRecipeCard = ({
     icon,
     showDescription = false,
     variant,
+    searchValue,
 }: NewRecipeCardType) => {
     const { isDesktop } = useViewport();
 
-    return isDesktop ? (
-        <div className={s.recipeCard}>
-            {withImage && <img src={image} alt='image' className={s.image} />}
+    const linkTo =
+        categorySlug && subcategorySlug
+            ? `/${categorySlug}/${subcategorySlug}/${id}`
+            : `/the-juiciest/${id}`;
 
-            <div className={s.descriptionContainer}>
-                <div className={s.titleContainer}>
-                    <span className={s.title}>{title}</span>
-                    {showDescription && <p className={s.description}>{description}</p>}
-                </div>
-                <div className={s.labelContainer}>
-                    <div className={s.iconLabelWrapper}>
-                        <img src={icon} width='18' height='18' />
-                        <div>
-                            <button className={s.label}>{category}</button>
-                        </div>
-                    </div>
-                    <div className={s.iconsContainer}>
-                        <div className={s.countContainer}>
-                            {isLiked && <img src={heartEyes} alt='heart' />}
-                            <span className={s.number}>{likesCount}</span>
-                        </div>
-                        <div className={s.countContainer}>
-                            {isSaved && <img src={bookmarkHeart} alt='eyes' />}
-                            <span className={s.number}>{savesCount}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ) : (
-        <div
+    return (
+        <Link
+            to={linkTo}
             className={clsx(s.recipeCard, {
                 [s.compact]: variant === 'compact',
                 [s.expanded]: variant === 'expanded',
             })}
+            data-test-id={dataTestId}
         >
             {withImage && <img src={image} alt='image' className={s.image} />}
 
-            <div className={s.labelContainer}>
-                <img src={icon} width='20' height='18' />
-                <div>
-                    <button className={s.label}>{category}</button>
-                </div>
-            </div>
+            {isDesktop ? (
+                <div className={s.descriptionContainer}>
+                    <div className={s.titleContainer}>
+                        <span className={s.title}>
+                            {searchValue ? highlightMatch(title, searchValue) : title}
+                        </span>
 
-            <div className={s.titleWrapper}>
-                <span className={s.title}>{title}</span>
-                {variant === 'expanded' && description && (
-                    <p className={s.description}>{description}</p>
-                )}
-                <div className={s.iconsContainer}>
-                    <div className={s.countContainer}>
-                        {isLiked && <img src={heartEyes} alt='heart' />}
-                        <span className={s.number}>{likesCount}</span>
+                        {showDescription && <p className={s.description}>{description}</p>}
                     </div>
-                    <div className={s.countContainer}>
-                        {isSaved && <img src={bookmarkHeart} alt='eyes' />}
-                        <span className={s.number}>{savesCount}</span>
+                    <div className={s.labelContainer}>
+                        <div className={s.iconLabelWrapper}>
+                            {icon && <img src={icon} width='18' height='18' alt='icon' />}
+                            <div>
+                                <button className={s.label}>{category}</button>
+                            </div>
+                        </div>
+                        <div className={s.iconsContainer}>
+                            <div className={s.countContainer}>
+                                {isLiked && <img src={heartEyes} alt='heart' />}
+                                <span className={s.number}>{likesCount}</span>
+                            </div>
+                            <div className={s.countContainer}>
+                                {isSaved && <img src={bookmarkHeart} alt='bookmark' />}
+                                <span className={s.number}>{savesCount}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            ) : (
+                <>
+                    <div className={s.labelContainer}>
+                        {icon && <img src={icon} width='20' height='18' alt='icon' />}
+                        <div>
+                            <button className={s.label}>{category}</button>
+                        </div>
+                    </div>
+
+                    <div className={s.titleWrapper}>
+                        <span className={s.title}>
+                            {searchValue ? highlightMatch(title, searchValue) : title}
+                        </span>
+                        {variant === 'expanded' && description && (
+                            <p className={s.description}>{description}</p>
+                        )}
+                        <div className={s.iconsContainer}>
+                            <div className={s.countContainer}>
+                                {isLiked && <img src={heartEyes} alt='heart' />}
+                                <span className={s.number}>{likesCount}</span>
+                            </div>
+                            <div className={s.countContainer}>
+                                {isSaved && <img src={bookmarkHeart} alt='bookmark' />}
+                                <span className={s.number}>{savesCount}</span>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
+        </Link>
     );
 };

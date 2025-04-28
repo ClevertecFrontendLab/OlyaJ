@@ -3,14 +3,32 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    width: 898px;
+    height: 100%;
+    border-radius: 24px;
+    background: #fff;
+    transition:
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.sectionHeader.active {
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .title {
     color: var(--black, #000);
     text-align: center;
-    font-size: clamp(24px, 2vw, 48px);
+    font-size: 48px;
     font-weight: 700;
     line-height: clamp(32px, 2vw, 48px);
+    position: relative;
+    z-index: 10;
 }
 
 .filterIcon {
@@ -30,6 +48,7 @@
 
 .input {
     width: 458px !important;
+    position: relative;
 }
 
 .input::placeholder {
@@ -45,9 +64,15 @@
 }
 
 .searchIcon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    position: relative;
+    right: 40px;
+    z-index: 1000;
+}
+
+.disabledIcon {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
 }
 
 .filterInputWrapper {
@@ -55,6 +80,7 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
+    z-index: 1000;
 }
 
 .toggleWrapper {
@@ -70,7 +96,12 @@
 }
 
 .select {
-    width: 234px !important;
+    width: 234px;
+    border: 1px solid transparent;
+}
+
+.activeSelect {
+    border: 1px solid #2db100;
 }
 
 @media (max-width: 768px) {
@@ -80,6 +111,11 @@
 
     .sectionHeader {
         gap: 6px;
+        width: 600px;
+    }
+
+    .title {
+        font-size: 24px;
     }
 
     .filterIcon {
@@ -95,6 +131,11 @@
 @media (max-width: 360px) {
     .input {
         width: 284px !important;
+    }
+
+    .sectionHeader {
+        width: 360px;
+        padding-left: 16px;
     }
 
     .filterIcon {
