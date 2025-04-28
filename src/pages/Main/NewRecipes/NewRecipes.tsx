@@ -154,7 +154,8 @@ export const NewRecipes = ({ searchValue }: NewRecipesType) => {
                     breakpoints={{
                         360: {
                             slidesPerView: 2,
-                            spaceBetween: 16,
+                            spaceBetween: 12,
+                            centeredSlides:false
                         },
                         768: {
                             slidesPerView: 4.2,
