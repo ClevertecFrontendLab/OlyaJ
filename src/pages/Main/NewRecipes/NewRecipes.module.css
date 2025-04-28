@@ -1,3 +1,7 @@
+:global(.swiper) {
+    overflow: visible !important;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -23,18 +27,18 @@
 .arrowRight {
     position: absolute;
     top: 45%;
-    z-index: 10;
+    z-index: 100;
     cursor: pointer;
     width: 48px;
     height: 48px;
 }
 
 .arrowLeft {
-    left: 1px;
+    left: -2px;
 }
 
 .arrowRight {
-    right: 1px;
+    right: -2px;
 }
 
 @media (max-width: 768px) {

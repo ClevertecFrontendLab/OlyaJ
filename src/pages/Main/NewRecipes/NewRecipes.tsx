@@ -144,6 +144,8 @@ export const NewRecipes = ({ searchValue }: NewRecipesType) => {
                 <Swiper
                     data-test-id={'carousel'}
                     modules={[Navigation]}
+                    slidesPerView={'auto'}
+                    centeredSlides={true}
                     loop={true}
                     navigation={{
                         nextEl: '.swiper-button-next',
