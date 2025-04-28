@@ -34,11 +34,11 @@
 }
 
 .arrowLeft {
-    left: -2px;
+    left: -12px;
 }
 
 .arrowRight {
-    right: -2px;
+    right: -20px;
 }
 
 @media (max-width: 768px) {
