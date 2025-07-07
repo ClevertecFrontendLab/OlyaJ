@@ -1,0 +1,11 @@
+<svg width="206" height="206" viewBox="0 0 206 206" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Area button">
+<rect id="Rectangle 42" width="206" height="206" fill="url(#paint0_radial_473_66324)" fill-opacity="0.7"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_473_66324" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(103 103) rotate(90) scale(103)">
+<stop stop-color="#C4FF61"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

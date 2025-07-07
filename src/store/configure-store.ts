@@ -1,8 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-
-import { apiSlice } from '~/query/create-api';
-
 import appReducer, { appSlice } from './app-slice';
+import { apiSlice } from '../query/create-api';
+
 const isProduction = false;
 const rootReducer = combineReducers({
     [appSlice.name]: appReducer,

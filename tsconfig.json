@@ -4,8 +4,10 @@
         "traceResolution": true,
         "types": ["node", "cypress"],
         "paths": {
-            "~/*": ["./src/*"],
-            "@public/*": ["./public/*"]
+            "@public/*": ["./public/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@features/*": ["./src/features/*"],
+            "@app/*": ["./src/app/*"]
         },
         "plugins": [
             {

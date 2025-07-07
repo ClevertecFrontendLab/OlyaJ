@@ -1,6 +1,0 @@
-.sectionTitle {
-    color: var(--black, #000);
-    font-weight: 500;
-    font-size: clamp(24px, 3vw, 48px);
-    line-height: clamp(32px, 3vw, 48px);
-}
