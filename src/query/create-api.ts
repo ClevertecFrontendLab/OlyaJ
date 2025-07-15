@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
-    reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://marathon-api.clevertec.ru' }),
-    endpoints: () => ({}),
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({
+    baseUrl: '/api', // теперь ты ходишь через Vite-прокси
+  }),
+  endpoints: () => ({}),
 });

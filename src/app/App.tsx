@@ -1,14 +1,17 @@
 import { Header } from '@shared/ui/Header/Header';
-import './App.css';
 import './index.css';
 
 import { Outlet } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
+import { layoutContainerStyles } from './app.styles';
 
 function App() {
     return (
         <>
             <Header />
-            <Outlet />
+            <Box {...layoutContainerStyles}>
+                <Outlet />
+            </Box>
         </>
     );
 }

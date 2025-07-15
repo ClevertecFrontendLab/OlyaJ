@@ -1,4 +1,7 @@
 export const headerTabletStyles = {
+    position: 'fixed',
+    top: 0,
+    zIndex: 1000, 
     bg: '#FFFFD3',
     w: '100%',
     h: '64px',
