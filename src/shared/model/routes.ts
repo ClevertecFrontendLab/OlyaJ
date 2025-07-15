@@ -1,5 +1,6 @@
 export const ROUTES = {
     MAIN: '/',
+    AUTH: '/auth',
     SUBCATEGORY: '/:categoryId/:subcategoryId',
     RECIPE: '/:categoryId/:subcategoryId/:recipeId',
     MOST_JUICY: 'most-juicy/:recipeId',

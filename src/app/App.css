@@ -41,31 +41,3 @@
         animation: logo-spin infinite 20s linear;
     }
 }
-
-@media (max-width: 768px) {
-    .container {
-        max-width: 768px;
-    }
-
-    .grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
-
-    aside.hideOnMobile {
-        display: none;
-    }
-}
-
-@media (max-width: 360px) {
-    .container {
-        max-width: 360px;
-    }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    aside.hideOnMobile {
-        display: none;
-    }
-}

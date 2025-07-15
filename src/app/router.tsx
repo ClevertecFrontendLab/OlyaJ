@@ -9,6 +9,9 @@ export const router = createBrowserRouter([
                 path: '/',
                 lazy: () => import('@features/main/main.page'),
             },
+            {
+                path: 'auth',
+            },
         ],
     },
 ]);

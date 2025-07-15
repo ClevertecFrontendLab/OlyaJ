@@ -1,13 +1,9 @@
-import { Box, Container, Image } from '@chakra-ui/react';
-import { containerStyles, headerStyles, imageStyles } from './header.styles';
-import logo from './../../../../public/logo.svg';
+import { useBreakpointValue } from '@chakra-ui/react';
+import { HeaderDesktop } from './HeaderDesktop/HeaderDesktop';
+import { HeaderTablet } from './HeaderTablet /HeaderTablet';
 
 export const Header = () => {
-    return (
-        <Box as='header' {...headerStyles}>
-            <Container {...containerStyles}>
-                <Image src={logo} alt='logo' {...imageStyles} />
-            </Container>
-        </Box>
-    );
+    const isDesktop = useBreakpointValue({ md: false, lg: true });
+
+    return isDesktop ? <HeaderDesktop /> : <HeaderTablet />;
 };
