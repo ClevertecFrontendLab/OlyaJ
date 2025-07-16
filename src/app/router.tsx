@@ -7,11 +7,11 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
+        path: ROUTES.MAIN,
         lazy: () => import('@features/main/main.page'),
       },
       {
-        path: '/auth',
+        path: ROUTES.AUTH,
       },
       {
         path: ROUTES.SUBCATEGORY,
