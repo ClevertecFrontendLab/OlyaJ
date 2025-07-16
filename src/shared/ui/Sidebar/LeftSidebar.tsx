@@ -12,17 +12,18 @@ import {
     Spinner,
 } from '@chakra-ui/react';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
-import { rightSidebarStyles } from './rightSidebar.styles';
+
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
+import { leftSidebarStyles } from './leftSidebar.styles';
 
 
-export const RightSidebar = () => {
+export const LeftSidebar = () => {
     const { data: categories, isLoading, error } = useGetAllCategoriesQuery();
     const navigate = useNavigate()
 
     return (
-        <Box {...rightSidebarStyles}>
+        <Box {...leftSidebarStyles}>
 
             {isLoading && <Spinner />}
             {error && <Text color="red.500">Ошибка загрузки</Text>}
