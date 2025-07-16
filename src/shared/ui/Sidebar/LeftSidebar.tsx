@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
 
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, href, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
 import { leftSidebarStyles } from './leftSidebar.styles';
 
@@ -53,7 +53,10 @@ export const LeftSidebar = () => {
                                 <AccordionPanel px="0" py={2}>
                                     <VStack align="start" spacing={1}>
                                         {cat.subCategories.map((sub) => (
-                                            <RouterLink to={ROUTES.SUBCATEGORY} key={sub.category} color="gray.600">
+                                            <RouterLink
+                                                to={href(ROUTES.SUBCATEGORY,
+                                                    { categoryId: cat.category, subcategoryId: sub.category})}
+                                                key={sub.category} color="gray.600">
                                                 {sub.title}
                                             </RouterLink>
                                         ))}

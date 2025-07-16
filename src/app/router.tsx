@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
+import { ROUTES } from '@shared/model/routes';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
         path: '/auth',
       },
       {
-        path: '/:categoryId/:subcategoryId',
+        path: ROUTES.SUBCATEGORY,
         lazy: () => import('@features/subcategory/subcategory.page'),
       },
     ],
