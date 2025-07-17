@@ -6,7 +6,4 @@ export const layoutContainerStyles = {
 
   export const contentAppStyles = {
     mx: 'auto',
-    px: {base: '16px', md: '20px', lg:'20px'},
-    py: { base: '16px', md: '16px', lg: '32px' },
-   
 }
