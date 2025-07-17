@@ -2,7 +2,7 @@ import { Box, Image, useBreakpointValue } from '@chakra-ui/react';
 import logo from './../../../../../public/logo.svg';
 import logoMobile from './../../../../../public/logoMobile.svg';
 import burgerMenu from './../../../../../public/burger.svg';
-import closeButton from './../../../../../public/сIoseIcon.svg'
+import closeButton from './../../../../../public/closeButton.svg'
 import { headerTabletStyles, imageStyles } from './headerTablet.styles';
 import { useState } from 'react';
 import { BurgerMenu } from './Menu/BurgerMenu';

@@ -10,6 +10,7 @@ import {
   Icon,
   Link,
   Spinner,
+  Image,
 } from '@chakra-ui/react';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
 
@@ -69,7 +70,16 @@ export const LeftSidebar = ({ variant = 'desktop', onClose }: LeftSidebarProps) 
                       }
                     }}
                   >
-                    <Box flex="1" textAlign="left">
+                    <Box flex="1" textAlign="left" display="flex" alignItems="center" gap={2}>
+                      {cat.icon && (
+                        <Image
+                          src={`https://training-api.clevertec.ru${cat.icon}`}
+                          alt={cat.title}
+                          w='24px'
+                          h='24px'
+                          objectFit="contain"
+                        />
+                      )}
                       {cat.title}
                     </Box>
                     <AccordionIcon />
