@@ -1,12 +1,9 @@
-import { useParams } from 'react-router-dom';
+import { PageHeader } from './../../../src/widgets/PageHeader'
 
 function SubcategoryPage() {
-    const { categoryId, subcategoryId } = useParams();
-
   return (
     <div>
-      <h1>Категория: {categoryId}</h1>
-      <h2>Подкатегория: {subcategoryId}</h2>
+      <PageHeader/>
     </div>
   );
 }

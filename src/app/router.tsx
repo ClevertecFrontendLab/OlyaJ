@@ -17,6 +17,9 @@ export const router = createBrowserRouter([
         path: ROUTES.SUBCATEGORY,
         lazy: () => import('@features/subcategory/subcategory.page'),
       },
+      {
+        path: ROUTES.MOST_JUICY
+      }
     ],
   },
 ]);

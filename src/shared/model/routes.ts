@@ -3,7 +3,7 @@ export const ROUTES = {
     AUTH: '/auth',
     SUBCATEGORY: '/:categoryId/:subcategoryId',
     RECIPE: '/:categoryId/:subcategoryId/:recipeId',
-    MOST_JUICY: 'most-juicy/:recipeId',
+    MOST_JUICY: 'most-juicy',
     NOT_FOUND: '*',
 } as const;
 
@@ -15,9 +15,6 @@ export type PathParams = {
     [ROUTES.RECIPE]: {
         categoryId: string;
         subcategoryId: string;
-        recipeId: string;
-    };
-    [ROUTES.MOST_JUICY]: {
         recipeId: string;
     };
 };

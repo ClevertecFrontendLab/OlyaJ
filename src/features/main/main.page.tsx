@@ -1,9 +1,11 @@
+import { PageHeader } from './../../../src/widgets/PageHeader'
 
 
 function MainPage() {
     return (
-        <div>
-        </div>
+        <>
+            <PageHeader/>
+        </>
         );
 }
 
