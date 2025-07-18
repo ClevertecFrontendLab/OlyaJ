@@ -7,14 +7,15 @@ export const getLeftSidebarStyles = (variant: 'desktop' | 'mobile') => ({
   h: variant === 'mobile' ? 'calc(100vh - 64px)' : '100%',
   overflowY: variant === 'mobile' ? 'auto' : 'unset',
   w: variant === 'mobile' ? '334px' : '256px',
+  minW: "256px",
   bg: "white",
   display: variant === 'desktop'
     ? { base: 'none', md: 'none', lg: 'flex' }
     : 'flex',
-  flexDirection: "column",
-  justifyContent: "space-between",
+  flexDirection: "column" as const,
+  justifyContent: "space-between" as const,
   px: "16px",
   py: "24px",
   borderLeft: variant === 'mobile' ? '1px solid #E5E5E5' : 'none',
   borderRight: variant === 'desktop' ? '1px solid #E5E5E5' : 'none',
-});
+}) 

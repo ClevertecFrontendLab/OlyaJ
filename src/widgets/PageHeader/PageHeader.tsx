@@ -1,10 +1,10 @@
 import { Box, Heading, Image, Input, InputGroup, InputRightElement, Switch, Text, useBreakpointValue } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
-import { useGetAllCategoriesQuery } from "./../entities/categories/api/categoriesApi"
+import { useGetAllCategoriesQuery } from "./../../entities/categories/api/categoriesApi"
 import { allergenBoxStyles, allergenSwitchBox, filterButtonBox, filterButtonStyles, headerBoxStyles, headerTitleStyles, inputStyles, searchIconStyles, textStyles } from "./pageHeader.styles"
 import { useLocation, useParams } from "react-router-dom"
 import { ROUTES } from "@shared/model/routes"
-import filterButton from './../../public/filter.svg'
+import filterButton from './../../../public/filter.svg'
 import { ChangeEvent, useState } from "react"
 import { Select } from "@shared/ui/Select /Select"
 

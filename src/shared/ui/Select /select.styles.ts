@@ -1,4 +1,3 @@
-
 export const menuButtonStyle = {
     w: { base: "308px", md: "399px", lg: "234px" },
     minH: "40px",
@@ -12,7 +11,8 @@ export const menuButtonStyle = {
     _hover: { borderColor: "#2DB100", bg: "transparent" },
     _focus: { borderColor: "#2DB100", bg: "transparent" },
     _active: { borderColor: "#2DB100", bg: "transparent", },
-}
+} as const
+
 
 export const selectedWordStyle = {
     border: "1px solid #2DB100",
@@ -23,6 +23,7 @@ export const selectedWordStyle = {
     fontSize:"14px",
     fontWeight:"500"
 }
+
 
 export const checkboxStyle = {
     '.chakra-checkbox__control': {
@@ -43,7 +44,7 @@ export const checkboxStyle = {
         color: 'black',
       },
       _active: {
-        bg: '#D7FF94', // при клике
+        bg: '#D7FF94', 
       },
     },
     '.chakra-checkbox__label': {

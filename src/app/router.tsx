@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.MOST_JUICY
+      },
+      {
+        path: ROUTES.RECIPE,
+        lazy: () => import('@features/recipe/recipe.page'),
       }
     ],
   },

@@ -1,4 +1,4 @@
-import { PageHeader } from './../../../src/widgets/PageHeader'
+import { PageHeader } from "./../../widgets/PageHeader/PageHeader"
 
 function SubcategoryPage() {
   return (

@@ -10,9 +10,9 @@ export const headerTabletStyles = {
     justifyContent: 'space-between',
     py: '16px',
     px: { base: '16px', md: '20px' },
-};
+} as const
 
 export const imageStyles = {
     w: '135px',
     h: '32px',
-};
+}

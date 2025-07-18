@@ -34,8 +34,7 @@ export const LeftSidebar = ({ variant = 'desktop', onClose }: LeftSidebarProps) 
   const currentPath = location.pathname;
 
   return (
-    <Box {...getLeftSidebarStyles(variant)}
-    >
+    <Box {...getLeftSidebarStyles(variant)}>
       {isLoading && <Spinner />}
       {error && <Text color="red.500">Ошибка загрузки</Text>}
 

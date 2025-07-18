@@ -11,9 +11,9 @@ export const headerStyles = {
     py: '16px',
     pl: '16px',
     pr: '56px',
-};
+} as const
 
 export const imageStyles = {
     w: '135px',
     h: '32px',
-};
+}

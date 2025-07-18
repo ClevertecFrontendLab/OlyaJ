@@ -5,7 +5,8 @@ export const headerBoxStyles = {
     w: { base: "360px", md: "480px", lg: "898px" },
     h: { base: "112px", md: "112px", lg: "248px" },
     mx: "auto",
-}
+    mb: {base:"12px", md:"12px", lg:"56px"}
+} as const
 
 
 export const headerTitleStyles = {
@@ -17,12 +18,14 @@ export const headerTitleStyles = {
     color: "black",
 }
 
+
 export const filterButtonBox = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: "12px",
-}
+} as const
+
 
 export const filterButtonStyles = {
     w: { base: "32px", md: "32px", lg: "48px" },
@@ -41,26 +44,30 @@ export const inputStyles = {
     },
     display: "flex",
     alignItems: "center",
-}
+} as const
+
 
 export const searchIconStyles = {
     w: { base: "14px", md: "14px", lg: "18px" },
     h: { base: "14px", md: "14px", lg: "18px" },
-}
+} 
+
 
 export const allergenBoxStyles = {
     display: "flex",
     flexDirection: "row",
     gap:"12px",
     mt: "16px"
-}
+} as const
+
 
 export const allergenSwitchBox = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap:"12px"
-}
+} as const
+
 
 export const textStyles = {
     fontSize: "16px",

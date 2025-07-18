@@ -1,10 +1,11 @@
-import { PageHeader } from './../../../src/widgets/PageHeader'
-
+import { NewRecipes } from "./../../widgets/NewRecipes/NewRecipes"
+import { PageHeader } from "./../../widgets/PageHeader/PageHeader"
 
 function MainPage() {
     return (
         <>
             <PageHeader/>
+            <NewRecipes/>
         </>
         );
 }
