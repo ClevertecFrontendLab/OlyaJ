@@ -26,26 +26,31 @@ export const selectedWordStyle = {
 
 export const checkboxStyle = {
     '.chakra-checkbox__control': {
+      borderColor: '#D7FF94',
+      borderRadius: '2px',
+      bg: 'transparent', 
+      _hover: {
+        bg: '#D7FF94',
         borderColor: '#D7FF94',
-        borderRadius: '2px',
-        _hover: {
-            borderColor: '#D7FF94',
-            backgroundColor: '#D7FF94',
-            
-        },
-        _focus: {
-            borderColor: '#D7FF94',
-            backgroundColor: '#D7FF94',
-            
-        },
-        _checked: {
-            bg: '#D7FF94',
-            borderColor: '#D7FF94',
-            color: 'black',
-        },
+      },
+      _focus: {
+        bg: '#D7FF94',
+        borderColor: '#D7FF94',
+      },
+      _checked: {
+        bg: '#D7FF94',
+        borderColor: '#D7FF94',
+        color: 'black',
+      },
+      _active: {
+        bg: '#D7FF94', // при клике
+      },
     },
-};
-
+    '.chakra-checkbox__label': {
+      color: 'black',
+    },
+  };
+  
 
 
 
