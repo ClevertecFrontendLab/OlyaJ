@@ -1,16 +1,18 @@
-import { GetAllRecipesParams, RecipesResponse } from '../model/recipesTypes'
+import { Category, GetAllRecipesParams, RecipesResponse } from '../model/recipesTypes'
 import { apiSlice } from './../../../query/create-api'
 
 
-
 export const recipesApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
+   endpoints: (builder) => ({
      getAllRecipes: builder.query<RecipesResponse, GetAllRecipesParams>({
-        query: ()=> '/recipe'
+       query: () => '/recipe'
+     }),
+     getCategoryById: builder.query<Category, { id: string }>({
+       query: ({ id }) => `/category/${id}`
      })
-    }),
-  })
-
-  export const {useGetAllRecipesQuery} = recipesApi
-
+   })
+ });
+ 
+ export const { useGetAllRecipesQuery, useGetCategoryByIdQuery } = recipesApi;
+ 
 

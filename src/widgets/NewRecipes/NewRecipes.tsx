@@ -1,7 +1,7 @@
 import { Box, Heading, Image } from "@chakra-ui/react"
 import { boxStyles, headingStyle, leftArrowStyle, rightArrowStyle, swiperBox } from "./newRecipes.styles"
 import { useGetAllRecipesQuery } from "../../entities/recipes/api/recipesApi"
-import { useGetAllCategoriesQuery } from "./../../entities/categories/api/categoriesApi"
+import { useGetAllCategoriesQuery } from "../../entities/categories/api/categoriesApi"
 import { NewRecipeDesktopCard } from "../../shared/ui/Cards/NewRecipeDescktopCard/NewRecipeDesktopCard"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
@@ -11,11 +11,10 @@ import arrowLeft from "./../../../public/blackArrowLeft.svg"
 import arrowRight from "./../../../public/blackArrowRight.svg"
 import "./newRecipes.css"
 
+
 export const NewRecipes = () => {
   const { data: recipes } = useGetAllRecipesQuery({ sortBy: 'desc' })
   const { data: categories } = useGetAllCategoriesQuery()
-
-  if (!recipes?.data) return null
 
   const BASE_URL = "https://training-api.clevertec.ru"
 
@@ -34,9 +33,7 @@ export const NewRecipes = () => {
             prevEl: ".swiper-button-prev",
           }}
         >
-          {recipes.data.map((recipe) => {
-            const categoryId = recipe.categoriesIds?.[0]
-            const matchedCategory = categories?.find((cat) => cat._id === categoryId)
+          {recipes?.data?.map((recipe) => {
 
             return (
               <SwiperSlide key={recipe._id}>
@@ -44,17 +41,15 @@ export const NewRecipes = () => {
                   title={recipe.title}
                   description={recipe.description}
                   image={BASE_URL + recipe.image}
-                  category={matchedCategory?.title}
-                  icon={matchedCategory?.icon}
                   likeCount={recipe.likes}
                   saveCount={recipe.bookmarks}
-                  categoryId={matchedCategory?.category || "unknown"}
-                  subcategoryId={matchedCategory?.subCategories?.[0]?.category || "unknown"}
-                  recipeId={recipe._id || "unknown"}
+                  category={recipe.categoriesIds}
                 />
               </SwiperSlide>
-            )
+            );
           })}
+
+
         </Swiper>
       </Box>
 

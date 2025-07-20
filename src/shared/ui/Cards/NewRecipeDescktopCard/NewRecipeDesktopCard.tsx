@@ -2,25 +2,24 @@ import { Box, Image, Text } from "@chakra-ui/react"
 import saveIcon from './../../../../../public/bookmarkHeart.svg'
 import likeIcon from './../../../../../public/heartEyes.svg'
 import { categoryIconsBoxStyle, categoryStyle, descriptionBoxStyle, descriptionStyle, iconCategoryStyle, iconLikeSaveBoxStyle, iconStyle, imageDesktopStyle, likeSaveIconsBox, newRecipeDesktopCardStyle, titleDescriptionStyle, titleStyle } from "./newRecipeDesktopCard.styles"
-import { Link, href } from "react-router-dom"
-import { ROUTES } from "@shared/model/routes"
 
 
 export type NewRecipeCardProps = {
-    image: string
-    title: string
-    description: string
-    category?: string
-    icon?: string
-    likeCount?: number
-    saveCount?: number
-    categoryId: string
-    subcategoryId: string
-    recipeId: string
-  }
-  
+    image: string;
+    title: string;
+    description: string;
+    category?: string[];
+    icon?: string[];
+    likeCount?: number;
+    saveCount?: number;
+    recipeId?: string;
+    categoryId?: string;
+    subcategoryId?: string;
+}
 
-export const NewRecipeDesktopCard = ({ image, title, description, category, icon, likeCount, saveCount, categoryId, subcategoryId, recipeId}: NewRecipeCardProps) => {
+
+
+export const NewRecipeDesktopCard = ({ image, title, description, category, icon, likeCount, saveCount, recipeId, categoryId, subcategoryId }: NewRecipeCardProps) => {
 
     return (
         <Box {...newRecipeDesktopCardStyle}>
@@ -30,19 +29,26 @@ export const NewRecipeDesktopCard = ({ image, title, description, category, icon
 
                 {/*title + description*/}
                 <Box {...titleDescriptionStyle}>
-                    <Link to={href(ROUTES.RECIPE, {categoryId, subcategoryId, recipeId})}>
+
                     <Text {...titleStyle}>{title}</Text>
-                    </Link>
+
                     <Text {...descriptionStyle}>{description}</Text>
                 </Box>
 
                 {/*category + icons*/}
                 <Box {...categoryIconsBoxStyle}>
 
-                    <Box {...iconCategoryStyle} >
-                        <Image src={icon} alt="icon" {...iconStyle} />
-                        <Text {...categoryStyle}>{category}</Text>
+                    <Box {...iconCategoryStyle}>
+                        {category?.map((catTitle, index) => (
+                            <Box>
+                                {icon?.[index] && (
+                                    <Image src={icon[index]} alt="icon" {...iconStyle} />
+                                )}
+                                <Text {...categoryStyle}>{catTitle}</Text>
+                            </Box>
+                        ))}
                     </Box>
+
 
                     <Box {...likeSaveIconsBox}>
                         <Box {...iconLikeSaveBoxStyle}>
