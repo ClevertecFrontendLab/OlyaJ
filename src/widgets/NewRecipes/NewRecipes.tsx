@@ -10,21 +10,12 @@ import arrowLeft from "./../../../public/blackArrowLeft.svg"
 import arrowRight from "./../../../public/blackArrowRight.svg"
 import "./newRecipes.css"
 import { BASE_URL } from "./../../shared/constants/api"
-import { useGetAllCategoriesQuery } from "./../../entities/categories/api/categoriesApi"
-import { useMemo } from "react"
+import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 
 
 export const NewRecipes = () => {
   const { data: recipes } = useGetAllRecipesQuery({ sortBy: 'createdAt', sortOrder: 'desc' })
-  const { data: categories } = useGetAllCategoriesQuery()
-
-  const categoriesMap = useMemo(() => {
-    const map: Record<string, string> = {};
-    categories?.forEach((cat) => {
-      map[cat._id] = cat.title;
-    });
-    return map;
-  }, [categories]);
+  const {categoryMap} = useCategoryMap()
 
   return (
     <Box as="section" {...boxStyles}>
@@ -43,8 +34,8 @@ export const NewRecipes = () => {
         >
           {recipes?.data?.map((recipe) => {
             const categoryTitles = recipe.categoriesIds
-              .map((id) => categoriesMap[id])
-              .filter(Boolean);
+            .map(id => categoryMap[id])
+            .filter(Boolean);
 
             return (
               <SwiperSlide key={recipe._id}>

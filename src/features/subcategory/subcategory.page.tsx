@@ -7,6 +7,7 @@ import { useGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
 import { VerticalDesktopCard } from "@shared/ui/Cards/VerticalCards/VerticalDesktopCard/VerticalDesktopCard";
 import { BASE_URL } from "@shared/constants/api";
 import { cardsBoxStyle, subcategoryBoxStyle } from "./subcategory.styles";
+import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
@@ -30,6 +31,8 @@ function SubcategoryPage() {
     searchString,
   });
 
+  const { categoryMap } = useCategoryMap()
+
 
   if (isLoading) return <Spinner />;
   if (isError || !categories) return <Text>Ошибка загрузки категорий</Text>;
@@ -42,20 +45,28 @@ function SubcategoryPage() {
       <PageHeader />
       <SubcategoryTabs subCategories={currentCategory.subCategories} />
       <Box {...cardsBoxStyle}>
-        {recipes?.data.map(recipe => (
-          <VerticalDesktopCard
-            title={recipe.title}
-            description={recipe.description}
-            image={BASE_URL + recipe.image}
-            likeCount={recipe.likes}
-            saveCount={recipe.bookmarks}
-            category={recipe.categoriesIds}
-            categoryId={categoryId || ''}
-            subcategoryId={subcategoryId || ''}
-            recipeId={recipe._id || ''}
-          />
-        ))}
+        {recipes?.data.map(recipe => {
+          const categoryTitles = recipe.categoriesIds
+            .map((id) => categoryMap[id])
+            .filter(Boolean);
+
+          return (
+            <VerticalDesktopCard
+              key={recipe._id}
+              title={recipe.title}
+              description={recipe.description}
+              image={BASE_URL + recipe.image}
+              likeCount={recipe.likes}
+              saveCount={recipe.bookmarks}
+              category={categoryTitles}
+              categoryId={categoryId || ''}
+              subcategoryId={subcategoryId || ''}
+              recipeId={recipe._id || ''}
+            />
+          );
+        })}
       </Box>
+
     </Box>
   );
 }

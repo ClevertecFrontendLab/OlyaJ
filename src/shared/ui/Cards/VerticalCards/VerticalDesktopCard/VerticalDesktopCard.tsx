@@ -1,6 +1,6 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
-import { buttonBoxStyle, cookButtonStyle, saveButtonStyle, verticalCardBoxStyle, verticalCardDescriptionStyle, verticalCardImageStyle, verticalCardTitleStyle } from "./verticalDesktopCard.styles";
-import { descriptionStyle, iconLikeSaveBoxStyle, iconStyle, likeSaveIconsBox, titleDescriptionStyle } from "../../NewRecipeDescktopCard/newRecipeDesktopCard.styles";
+import { buttonBoxStyle, categoriesVerticalBoxStyle, cookButtonStyle, saveButtonStyle, verticalCardBoxStyle, verticalCardDescriptionStyle, verticalCardImageStyle, verticalCardTitleStyle } from "./verticalDesktopCard.styles";
+import { boxTextStyle, categoryStyle, descriptionStyle, iconLikeSaveBoxStyle, iconStyle, likeSaveIconsBox, titleDescriptionStyle } from "../../NewRecipeDescktopCard/newRecipeDesktopCard.styles";
 import saveIcon from './../../../../../../public/bookmarkHeart.svg'
 import likeIcon from './../../../../../../public/heartEyes.svg'
 import { href, useNavigate } from "react-router-dom";
@@ -32,7 +32,15 @@ export const VerticalDesktopCard = ({ image, title, description, category, icon,
             <Box {...verticalCardDescriptionStyle}>
 
                 {/*category + icons*/}
-                <Box >
+                <Box {...categoriesVerticalBoxStyle}>
+                    <Box >
+                        {category?.map((catTitle) => (
+                            <Box {...boxTextStyle}>
+                                <Text {...categoryStyle}>{catTitle}</Text>
+                            </Box>
+                        ))}
+                    </Box>
+              
                     <Box {...likeSaveIconsBox}>
                         <Box {...iconLikeSaveBoxStyle}>
                             <Image src={saveIcon} alt="icon" {...iconStyle} />

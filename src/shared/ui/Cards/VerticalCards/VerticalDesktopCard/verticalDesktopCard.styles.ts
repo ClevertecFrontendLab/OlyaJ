@@ -1,6 +1,5 @@
 export const verticalCardBoxStyle = {
     w: "668px",
-    h: "244px",
     display: "flex",
     flexDirection: "row",
     borderRadius: "8px",
@@ -9,16 +8,25 @@ export const verticalCardBoxStyle = {
 } as const
 
 
+export const categoriesVerticalBoxStyle = {
+    w:"274px",
+    display: "flex",
+    flexDirection:"row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+} as const 
+
+
 export const verticalCardImageStyle = {
     w: "346px",
-    h: "244px"
+    minH:"220px",
 }
 
 
 export const verticalCardDescriptionStyle = {
     display: "flex",
     flexDirection: "column",
-    gap: "24px",
+    justifyContent: "space-between",
     mx: "24px",
     my: "20px",
 } as const
