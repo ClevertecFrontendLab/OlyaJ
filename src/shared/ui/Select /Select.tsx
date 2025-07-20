@@ -66,7 +66,7 @@ export function Select({ placeholder, isDisabled}: SelectProps) {
                 </Box>
             </MenuButton>
 
-            <MenuList >
+            <MenuList zIndex={100}>
                 {allergenOptions.map((item, index) => (
                     <MenuItem
                         key={item}

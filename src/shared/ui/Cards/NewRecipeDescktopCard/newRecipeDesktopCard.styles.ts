@@ -1,12 +1,13 @@
 export const newRecipeDesktopCardStyle = {
     w: "322px",
-    h: "424px",
+    minH: "424px",
     borderRadius: "8px",
     border: "1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08))",   
     display: "flex",
     flexDirection: "column",
     overflow:"hidden",
     gap: "8px",
+    pb:"8px"
 } as const
 
 
@@ -50,28 +51,33 @@ export const descriptionStyle = {
     WebkitLineClamp: 3,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
-  } as const
-  
+} as const
 
 
 export const categoryIconsBoxStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "flex-start",
     w: "274px",
 } as const
 
 
-export const iconCategoryStyle = {
+export const categoriesBoxStyle = {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "8px",
+    flexWrap: "wrap",        
+    gap: "4px",              
+    alignItems: "flex-start" 
+} as const 
+
+
+export const boxTextStyle = {
+    display:"inline-block",
     borderRadius: "4px",   
     background: "var(--Lime-150, #D7FF94)",
     py: "4px",
     px: "4px",
-} as const
+} 
 
 
 export const iconStyle = {
@@ -91,6 +97,7 @@ export const likeSaveIconsBox = {
     display: "flex",
     flexDirection: "row",
     gap: "6px",
+    minW: "74px",
 } as const
 
 

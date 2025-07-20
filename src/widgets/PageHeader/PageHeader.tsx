@@ -2,7 +2,7 @@ import { Box, Heading, Image, Input, InputGroup, InputRightElement, Switch, Text
 import { SearchIcon } from "@chakra-ui/icons"
 import { useGetAllCategoriesQuery } from "./../../entities/categories/api/categoriesApi"
 import { allergenBoxStyles, allergenSwitchBox, filterButtonBox, filterButtonStyles, headerBoxStyles, headerTitleStyles, inputStyles, searchIconStyles, textStyles } from "./pageHeader.styles"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { ROUTES } from "@shared/model/routes"
 import filterButton from './../../../public/filter.svg'
 import { ChangeEvent, useState } from "react"
@@ -16,6 +16,7 @@ export const PageHeader = () => {
     const [value, setValue] = useState<string>('');
     const [isHeaderActive, setIsHeaderActive] = useState(false); 
     const [allergenFilterEnabled, setAllergenFilterEnabled] = useState(false)
+    const navigate = useNavigate()
 
     const isDesktop = useBreakpointValue({ base: false, md: false, lg: true })
     const isHome = location.pathname === ROUTES.MAIN
@@ -30,8 +31,13 @@ export const PageHeader = () => {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value)
+        const val = e.currentTarget.value
+        setValue(val)
         setIsHeaderActive(true)
+
+        const query = new URLSearchParams(location.search)
+        query.set("search", val)
+        navigate(`${location.pathname}?${query.toString()}`)
     }
 
     const handleOnSwitchChange = (e: ChangeEvent<HTMLInputElement>) => {

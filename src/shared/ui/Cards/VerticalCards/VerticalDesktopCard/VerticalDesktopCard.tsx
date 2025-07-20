@@ -61,7 +61,9 @@ export const VerticalDesktopCard = ({ image, title, description, category, icon,
 
                     <Button 
                         {...cookButtonStyle } 
-                        onClick = {()=>{navigate(href(ROUTES.RECIPE, {categoryId,subcategoryId, recipeId}))}}
+                        onClick = {()=>{
+                            window.scrollTo(0,0)
+                            navigate(href(ROUTES.RECIPE, {categoryId,subcategoryId, recipeId}))}}
                     >
                         Готовить
                     </Button>

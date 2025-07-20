@@ -3,25 +3,33 @@ import { SubcategoryTabs } from "@shared/ui/Tabs/Tabs";
 import { useGetAllCategoriesQuery } from "../../entities/categories/api/categoriesApi";
 import { useParams } from "react-router-dom";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import { useGetRecipesByCategoryIdQuery } from "./../../entities/recipes/api/recipesApi";
+import { useGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
 import { VerticalDesktopCard } from "@shared/ui/Cards/VerticalCards/VerticalDesktopCard/VerticalDesktopCard";
 import { BASE_URL } from "@shared/constants/api";
 import { cardsBoxStyle, subcategoryBoxStyle } from "./subcategory.styles";
 
 function SubcategoryPage() {
-  const { categoryId, subcategoryId, recipeId} = useParams();
+  const { categoryId, subcategoryId } = useParams();
   const { data: categories, isLoading, isError } = useGetAllCategoriesQuery();
 
   const currentCategory = categories?.find(cat => cat.category === categoryId);
   const currentSubcategory = currentCategory?.subCategories.find(sub => sub.category === subcategoryId);
+  const subcategoryIds = currentCategory?.subCategories.map(sub => sub._id) ?? [];
 
-  const { data: recipes, isLoading: recipesLoading } = useGetRecipesByCategoryIdQuery(
-    {
-      id: currentSubcategory?._id ?? '',
-      page: 1,
-      limit: 8,
-    },
-  );
+  const query = new URLSearchParams(location.search)
+  const searchString = query.get("search") || undefined
+
+  const shouldSearchAcrossAllSubcategories = !!searchString;
+
+  const { data: recipes } = useGetAllRecipesQuery({
+    subcategoriesIds: shouldSearchAcrossAllSubcategories
+      ? subcategoryIds.join(',')
+      : currentSubcategory?._id ?? '',
+    page: 1,
+    limit: 8,
+    searchString,
+  });
+
 
   if (isLoading) return <Spinner />;
   if (isError || !categories) return <Text>Ошибка загрузки категорий</Text>;
