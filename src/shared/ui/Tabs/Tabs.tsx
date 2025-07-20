@@ -2,38 +2,48 @@ import {
     Tabs,
     TabList,
     Tab,
-    Box,
-    Text,
-  } from '@chakra-ui/react';
-  import { SubCategory } from './../../../entities/categories/model/categoriesTypes'
-  
-  type Props = {
+} from '@chakra-ui/react';
+import { SubCategory } from './../../../entities/categories/model/categoriesTypes'
+import { Link, href, useParams } from 'react-router-dom';
+import { ROUTES } from '@shared/model/routes';
+import { tabListStyle } from './tabsStyles';
+
+type Props = {
     subCategories: SubCategory[];
-  };
-  
-  export const SubcategoryTabs = ({ subCategories }: Props) => {
-    if (!subCategories || subCategories.length === 0) {
-      return <Box mt={4}><Text>Подкатегории не найдены.</Text></Box>;
-    }
-  
+};
+
+export const SubcategoryTabs = ({ subCategories }: Props) => {
+    const { subcategoryId, categoryId } = useParams()
+
+
     return (
-      <Tabs variant="unstyled" colorScheme="green" mt={6}>
-        <TabList gap={4} borderBottom="1px solid #e2e8f0" overflowX="auto">
-          {subCategories.map((sub) => (
-            <Tab
-              key={sub.title}
-              _selected={{
-                color: 'green.600',
-                borderBottom: '2px solid green',
-                fontWeight: 'semibold',
-              }}
-              whiteSpace="nowrap"
+        <Tabs index={subCategories.findIndex(subCat => subCat.category === subcategoryId)} variant="unstyled" colorScheme="green" mt={6}>
+            <TabList
+                {...tabListStyle}
+                sx={{
+                    scrollbarWidth: 'none',
+                    '&::-webkit-scrollbar': {
+                        display: 'none',
+                    },
+                }}
             >
-              {sub.title}
-            </Tab>
-          ))}
-        </TabList>
-      </Tabs>
+                {subCategories.map((sub) => (
+                    <Tab
+                        key={sub.title}
+                        as={Link}
+                        to={href(ROUTES.SUBCATEGORY, { categoryId: categoryId!, subcategoryId: sub.category })}
+                        _selected={{
+                            color: 'green.600',
+                            borderBottom: '2px solid green',
+                            fontWeight: 'semibold',
+                        }}
+                        _focus={{ boxShadow: 'none', outline: 'none' }}
+                        whiteSpace="nowrap"
+                    >
+                        {sub.title}
+                    </Tab>
+                ))}
+            </TabList>
+        </Tabs>
     );
-  };
-  
+};

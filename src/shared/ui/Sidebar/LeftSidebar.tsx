@@ -18,6 +18,7 @@ import { Link as RouterLink, href, useLocation, useNavigate } from 'react-router
 import { ROUTES } from '@shared/model/routes';
 import { getLeftSidebarStyles } from './leftSidebar.styles';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import { BASE_URL } from '@shared/constants/api';
 
 
 type SidebarVariant = 'desktop' | 'mobile'
@@ -72,12 +73,13 @@ export const LeftSidebar = ({ variant = 'desktop', onClose }: LeftSidebarProps) 
                     <Box flex="1" textAlign="left" display="flex" alignItems="center" gap={2}>
                       {cat.icon && (
                         <Image
-                          src={`https://training-api.clevertec.ru${cat.icon}`}
-                          alt={cat.title}
-                          w='24px'
-                          h='24px'
-                          objectFit="contain"
-                        />
+                        src={`${BASE_URL}${cat.icon}`}
+                        alt={cat.title}
+                        w="24px"
+                        h="24px"
+                        objectFit="contain"
+                      />
+                      
                       )}
                       {cat.title}
                     </Box>

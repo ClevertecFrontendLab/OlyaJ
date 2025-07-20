@@ -9,10 +9,15 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
 import { href } from 'react-router-dom';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
+import { useGetRecipeByIdQuery} from './../../../entities/recipes/api/recipesApi'
 
 export const Breadcrumbs = () => {
-    const { categoryId, subcategoryId } = useParams();
+    const { categoryId, subcategoryId, recipeId } = useParams();
     const { data: categories, isLoading, error } = useGetAllCategoriesQuery();
+    const { data: recipe } = useGetRecipeByIdQuery(recipeId ?? '', {
+        skip: !recipeId,
+      });
+
 
     if (isLoading) return <Spinner />;
     if (error) return <Text color="red.500">Ошибка загрузки категорий</Text>;
@@ -51,6 +56,12 @@ export const Breadcrumbs = () => {
                     <BreadcrumbLink>
                         {currentSubcategory?.title ?? subcategoryId}
                     </BreadcrumbLink>
+                </BreadcrumbItem>
+            )}
+
+            {recipeId && recipe && (
+                <BreadcrumbItem isCurrentPage>
+                    <BreadcrumbLink>{recipe.title}</BreadcrumbLink>
                 </BreadcrumbItem>
             )}
         </Breadcrumb>
