@@ -10,7 +10,8 @@ export const menuButtonStyle = {
     borderColor: "gray.300",
     _hover: { borderColor: "#2DB100", bg: "transparent" },
     _focus: { borderColor: "#2DB100", bg: "transparent" },
-    _active: { borderColor: "#2DB100", bg: "transparent", },
+    _active: { borderColor: "#2DB100", bg: "transparent" },
+    py: "6px"
 } as const
 
 

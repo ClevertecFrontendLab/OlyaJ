@@ -3,7 +3,7 @@ export const headerBoxStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     w: { base: "360px", md: "480px", lg: "898px" },
-    h: { base: "112px", md: "112px", lg: "248px" },
+    minH: { base: "112px", md: "112px", lg: "248px" },
     mx: "auto",
     mb: {base:"12px", md:"12px", lg:"56px"}
 } as const
