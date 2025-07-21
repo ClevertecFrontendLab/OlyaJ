@@ -2,7 +2,7 @@ import { Box, Heading, Image, Input, InputGroup, InputRightElement, Switch, Text
 import { SearchIcon } from "@chakra-ui/icons"
 import { useGetAllCategoriesQuery } from "./../../entities/categories/api/categoriesApi"
 import { allergenBoxStyles, allergenSwitchBox, filterButtonBox, filterButtonStyles, headerBoxStyles, headerTitleStyles, inputStyles, searchIconStyles, textStyles } from "./pageHeader.styles"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation, useParams, useSearchParams } from "react-router-dom"
 import { ROUTES } from "@shared/model/routes"
 import filterButton from './../../../public/filter.svg'
 import { ChangeEvent, useState } from "react"
@@ -16,15 +16,19 @@ export const PageHeader = () => {
     const [value, setValue] = useState<string>('');
     const [isHeaderActive, setIsHeaderActive] = useState(false); 
     const [allergenFilterEnabled, setAllergenFilterEnabled] = useState(false)
-    const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
+
 
     const isDesktop = useBreakpointValue({ base: false, md: false, lg: true })
     const isHome = location.pathname === ROUTES.MAIN
+    const isMostJuicy = location.pathname === ROUTES.MOST_JUICY;
     const currentCategory = categories?.find(cat => cat.category === categoryId)
 
     const title = isHome
         ? 'Приятного аппетита!'
-        : currentCategory?.title
+        : isMostJuicy
+            ? 'Самое сочное'
+            : currentCategory?.title 
 
     const handleFilterChange = () => {
         setIsHeaderActive(true)
@@ -35,9 +39,8 @@ export const PageHeader = () => {
         setValue(val)
         setIsHeaderActive(true)
 
-        const query = new URLSearchParams(location.search)
-        query.set("search", val)
-        navigate(`${location.pathname}?${query.toString()}`)
+        searchParams.set("search", val)
+        setSearchParams(searchParams)
     }
 
     const handleOnSwitchChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,10 +1,10 @@
-
+import { PageHeader } from "./../../widgets/PageHeader/PageHeader"
 
 
 function MostJuicyPage() {
     return (
       <div>
-        Hi, I'm most juicy page
+        <PageHeader/>
       </div>
     );
   }

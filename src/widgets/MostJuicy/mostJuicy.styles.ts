@@ -18,4 +18,9 @@ export const headingButtonBoxStyle = {
 
 export const buttonStyle = {
     background: "#B1FF2E",
-}
+    _hover: {
+      background: "#D1FF6A", 
+    },
+    transition: "background 0.2s ease",
+  } as const;
+  

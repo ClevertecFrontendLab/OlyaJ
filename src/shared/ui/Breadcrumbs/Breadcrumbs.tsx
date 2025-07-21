@@ -5,19 +5,18 @@ import {
     Spinner,
     Text,
 } from '@chakra-ui/react';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
 import { href } from 'react-router-dom';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
-import { useGetRecipeByIdQuery} from './../../../entities/recipes/api/recipesApi'
+import { useGetRecipeByIdQuery } from './../../../entities/recipes/api/recipesApi'
 
 export const Breadcrumbs = () => {
     const { categoryId, subcategoryId, recipeId } = useParams();
     const { data: categories, isLoading, error } = useGetAllCategoriesQuery();
     const { data: recipe } = useGetRecipeByIdQuery(recipeId ?? '', {
         skip: !recipeId,
-      });
-
+    });
 
     if (isLoading) return <Spinner />;
     if (error) return <Text color="red.500">Ошибка загрузки категорий</Text>;
@@ -34,6 +33,9 @@ export const Breadcrumbs = () => {
             subcategoryId: firstSub.category,
         })
         : ROUTES.MAIN;
+
+    const location = useLocation()
+    const juicyPage = location.pathname === ROUTES.MOST_JUICY
 
     return (
         <Breadcrumb fontSize="m" separator=">" mb={4}>
@@ -62,6 +64,14 @@ export const Breadcrumbs = () => {
             {recipeId && recipe && (
                 <BreadcrumbItem isCurrentPage>
                     <BreadcrumbLink>{recipe.title}</BreadcrumbLink>
+                </BreadcrumbItem>
+            )}
+
+            {juicyPage && (
+                <BreadcrumbItem isCurrentPage>
+                    <BreadcrumbLink>
+                        Самое сочное
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
             )}
         </Breadcrumb>

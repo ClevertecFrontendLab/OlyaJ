@@ -21,8 +21,7 @@ export const categoriesVerticalBoxStyle = {
 export const verticalCardImageStyle = {
     w: "346px",
     minH:"220px",
-    maxH:"280px",
-
+    maxH:"285px",
 }
 
 

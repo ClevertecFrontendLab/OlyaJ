@@ -3,7 +3,7 @@ export const ROUTES = {
     AUTH: '/auth',
     SUBCATEGORY: '/:categoryId/:subcategoryId',
     RECIPE: '/:categoryId/:subcategoryId/:recipeId',
-    MOST_JUICY: 'most-juicy',
+    MOST_JUICY: '/mostJuicy',
     NOT_FOUND: '*',
 } as const;
 
