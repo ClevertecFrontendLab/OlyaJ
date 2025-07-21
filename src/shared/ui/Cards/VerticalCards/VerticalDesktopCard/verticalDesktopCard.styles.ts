@@ -5,6 +5,7 @@ export const verticalCardBoxStyle = {
     borderRadius: "8px",
     border: "1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08))",
     background: "var(--white, #FFF)",
+    overflow:"hidden",
 } as const
 
 
@@ -20,6 +21,8 @@ export const categoriesVerticalBoxStyle = {
 export const verticalCardImageStyle = {
     w: "346px",
     minH:"220px",
+    maxH:"280px",
+
 }
 
 

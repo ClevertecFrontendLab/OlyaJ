@@ -21,7 +21,7 @@ export type VerticalDesktopCardProps = {
 }
 
 
-export const VerticalDesktopCard = ({ image, title, description, category, icon, likeCount, saveCount,categoryId,subcategoryId,recipeId }: VerticalDesktopCardProps) => {
+export const VerticalDesktopCard = ({ image, title, description, category, likeCount, saveCount,categoryId,subcategoryId,recipeId }: VerticalDesktopCardProps) => {
     
     const navigate = useNavigate()
 
