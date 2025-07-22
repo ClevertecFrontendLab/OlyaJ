@@ -1,5 +1,5 @@
 export const getLeftSidebarStyles = (variant: 'desktop' | 'mobile') => ({
-  position: variant === 'mobile' ? 'fixed' : 'fixed', 
+  position: variant === 'mobile' ? 'fixed' : 'none', 
   top: variant === 'mobile' ? '64px' : '0',
   right: variant === 'mobile' ? '0' : 'auto',
   left: variant === 'mobile' ? 'auto' : '0',
