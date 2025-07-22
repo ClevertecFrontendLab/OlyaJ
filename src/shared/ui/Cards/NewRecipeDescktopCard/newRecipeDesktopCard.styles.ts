@@ -75,7 +75,7 @@ export const boxTextStyle = {
     display:"inline-block",
     borderRadius: "4px",   
     background: "var(--Lime-150, #D7FF94)",
-    py: "4px",
+    py: "1px",
     px: "4px",
 } 
 

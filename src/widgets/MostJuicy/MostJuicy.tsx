@@ -13,7 +13,7 @@ import { BASE_URL } from "./../../shared/constants/api"
 
 export const MostJuicy = () => {
     const navigate = useNavigate()
-    const { data: recipes } = useGetAllRecipesQuery({ sortBy: 'likes', sortOrder: 'desc', limit: 4 });
+    const { data: recipes } = useGetAllRecipesQuery({  sortBy: 'likes', sortOrder: 'asc', limit:4 });
     const { categoryMap } = useCategoryMap()
 
 

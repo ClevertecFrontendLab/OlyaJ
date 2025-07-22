@@ -3,7 +3,7 @@ export const boxJuicyStyle = {
     flexDirection:"column",
     gap:"24px",
     maxW:"1360px",
-    mt:"32px"
+    mt:"40px"
 } as const 
 
 
