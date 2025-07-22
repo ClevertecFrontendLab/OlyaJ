@@ -1,11 +1,11 @@
 export const getLeftSidebarStyles = (variant: 'desktop' | 'mobile') => ({
-  position: variant === 'mobile' ? 'fixed' : 'none',
+  position: variant === 'mobile' ? 'fixed' : 'fixed', 
   top: variant === 'mobile' ? '64px' : '0',
   right: variant === 'mobile' ? '0' : 'auto',
   left: variant === 'mobile' ? 'auto' : '0',
-  zIndex: variant === 'mobile' ? 'overlay' : 'auto',
-  h: variant === 'mobile' ? 'calc(100vh - 64px)' : '100%',
-  overflowY: variant === 'mobile' ? 'auto' : 'unset',
+  zIndex: variant === 'mobile' ? 'overlay' : '10',
+  h: variant === 'mobile' ? 'calc(100vh - 64px)' : '100vh', 
+  overflowY: 'auto', 
   w: variant === 'mobile' ? '334px' : '256px',
   minW: "256px",
   bg: "white",
@@ -18,4 +18,4 @@ export const getLeftSidebarStyles = (variant: 'desktop' | 'mobile') => ({
   py: "24px",
   borderLeft: variant === 'mobile' ? '1px solid #E5E5E5' : 'none',
   borderRight: variant === 'desktop' ? '1px solid #E5E5E5' : 'none',
-}) 
+});

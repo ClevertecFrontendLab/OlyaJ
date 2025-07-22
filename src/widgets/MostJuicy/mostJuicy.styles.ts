@@ -1,6 +1,6 @@
 export const boxJuicyStyle = {
     display:"flex",
-    flexDireciton:"column",
+    flexDirection:"column",
     gap:"24px",
     maxW:"1360px",
     mt:"32px"
@@ -22,5 +22,5 @@ export const buttonStyle = {
       background: "#D1FF6A", 
     },
     transition: "background 0.2s ease",
-  } as const;
+} as const;
   
