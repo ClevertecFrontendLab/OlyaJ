@@ -5,6 +5,7 @@ export const boxStyles = {
     gap: {base:"12px", md:"12px", lg:"24px"},
     px:"16px",
     position: "relative",
+    justifyContent: "start"
 } as const 
 
 
@@ -16,8 +17,8 @@ export const headingStyle = {
 
 export const swiperBox = {
     w: "100%", 
-    maxW: "1340px", 
-    mx: "auto",
+    maxW: {base:"328px", md:"728px",lg:"1340px"}, 
+
     position: "relative",
     overflow: "hidden", 
   } as const
@@ -32,6 +33,7 @@ export const leftArrowStyle = {
     transform:"translateY(-50%)",
     zIndex:"10",
     cursor:"pointer",
+    display: {base:"none", md:"none"},
 } as const 
 
 
@@ -44,5 +46,6 @@ export const rightArrowStyle = {
     transform:"translateY(-50%)",
     zIndex:"10",
     cursor:"pointer",
+    display: {base:"none", md:"none"},
 } as const 
   

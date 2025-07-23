@@ -1,4 +1,4 @@
-import { Box, Heading, Image } from "@chakra-ui/react"
+import { Box, Heading, Image, useBreakpointValue } from "@chakra-ui/react"
 import { boxStyles, headingStyle, leftArrowStyle, rightArrowStyle, swiperBox } from "./newRecipes.styles"
 import { useGetAllRecipesQuery } from "../../entities/recipes/api/recipesApi"
 import { NewRecipeDesktopCard } from "../../shared/ui/Cards/NewRecipeDescktopCard/NewRecipeDesktopCard"
@@ -11,11 +11,21 @@ import arrowRight from "./../../../public/blackArrowRight.svg"
 import "./newRecipes.css"
 import { BASE_URL } from "./../../shared/constants/api"
 import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
+import { NewRecipeTabletCard } from "@shared/ui/Cards/NewRecipeTabletCard/NewRecipeTabletCard"
 
 
 export const NewRecipes = () => {
   const { data: recipes } = useGetAllRecipesQuery({ sortBy: 'createdAt', sortOrder: 'desc' })
-  const {categoryMap} = useCategoryMap()
+  const { categoryMap } = useCategoryMap()
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
+
+  const slidesPerView = useBreakpointValue({
+    base: 2,
+    md: 4,      
+    lg: 4,       
+  });
+  
+
 
   return (
     <Box as="section" {...boxStyles}>
@@ -25,7 +35,7 @@ export const NewRecipes = () => {
         <Swiper
           modules={[Navigation]}
           spaceBetween={24}
-          slidesPerView={4}
+          slidesPerView={slidesPerView}
           loop={true}
           navigation={{
             nextEl: ".swiper-button-next",
@@ -34,24 +44,33 @@ export const NewRecipes = () => {
         >
           {recipes?.data?.map((recipe) => {
             const categoryTitles = recipe.categoriesIds
-            .map(id => categoryMap[id])
-            .filter(Boolean);
+              .map(id => categoryMap[id])
+              .filter(Boolean)
 
             return (
               <SwiperSlide key={recipe._id}>
-                <NewRecipeDesktopCard
-                  title={recipe.title}
-                  description={recipe.description}
-                  image={BASE_URL + recipe.image}
-                  likeCount={recipe.likes}
-                  saveCount={recipe.bookmarks}
-                  category={categoryTitles}
-                  recipeId={recipe._id}
-                />
+                {isDesktop ? (
+                  <NewRecipeDesktopCard
+                    title={recipe.title}
+                    description={recipe.description}
+                    image={BASE_URL + recipe.image}
+                    likeCount={recipe.likes}
+                    saveCount={recipe.bookmarks}
+                    category={categoryTitles}
+                    recipeId={recipe._id}
+
+                  />
+                ) : (
+                  <NewRecipeTabletCard
+                    title={recipe.title}
+                    image={BASE_URL + recipe.image}
+                    likeCount={recipe.likes}
+                    saveCount={recipe.bookmarks}
+                  />
+                )}
               </SwiperSlide>
             );
           })}
-
 
         </Swiper>
       </Box>

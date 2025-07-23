@@ -67,7 +67,7 @@ export const categoriesBoxStyle = {
     display: "flex",
     flexWrap: "wrap",        
     gap: "4px",              
-    alignItems: "flex-start" 
+    alignItems: "flex-start", 
 } as const 
 
 
@@ -81,8 +81,8 @@ export const boxTextStyle = {
 
 
 export const iconStyle = {
-    w: "16px",
-    h: "16px",
+    w: {base:"12px", md:"12px", lg:"16px"},
+    h: {base:"12px", md:"12px", lg:"16px"},
   }
   
 

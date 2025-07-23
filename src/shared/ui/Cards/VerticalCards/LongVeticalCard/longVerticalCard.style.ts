@@ -14,6 +14,7 @@ export const longVerticalCardStyle = {
 export const titleVerticalCardStyle = {
     w: { base: "194px", md: "106px", lg: "485px" },
     fontSize: { base: "18px", md: "18px", lg: "20px" },
+    fontWeight: "500", 
     whiteSpace: "nowrap",
     overflow: "hidden",      
     textOverflow: "ellipsis"
@@ -21,9 +22,11 @@ export const titleVerticalCardStyle = {
 
 
 export const buttonVerticalCardStyle = {
-    size:"sm",
+    h:"32px",
+    w:{base:"70px", md:"70px",lg:"87px"},
     variant:"outline",
     color:"green.600",
     borderColor:"green.500",
-    _hover: { bg: "green.50" }
+    _hover: { bg: "green.50" },
+    fontSize: {base:"12px", md:"12px", lg:"14px"}
 } 
