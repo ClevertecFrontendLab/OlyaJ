@@ -1,6 +1,6 @@
 import { Box, Text, Image} from "@chakra-ui/react";
-import { footerTextCardStyle, titleDescriptionBoxStyle } from "./footerTextCard.style";
-import { boxTextStyle, categoriesBoxStyle, categoryIconsBoxStyle, categoryStyle, iconLikeSaveBoxStyle, iconStyle, likeSaveIconsBox } from "../../NewRecipeDescktopCard/newRecipeDesktopCard.styles";
+import { categoryIconsFooterBoxStyle, descriptionFooterStyle, footerTextCardStyle, titleDescriptionBoxStyle, titleFooterStyle } from "./footerTextCard.style";
+import { boxTextStyle, categoriesBoxStyle, categoryStyle, iconLikeSaveBoxStyle, iconStyle, likeSaveIconsBox } from "../../NewRecipeDescktopCard/newRecipeDesktopCard.styles";
 import saveIcon from './../../../../../../public/bookmarkHeart.svg'
 import likeIcon from './../../../../../../public/heartEyes.svg'
 
@@ -13,15 +13,16 @@ export type FooterTextCardProps = {
 }
 
 export const FooterTextCard = ({ title, description, category, likeCount, saveCount }: FooterTextCardProps) => {
+    
     return (
         <Box {...footerTextCardStyle}>
             <Box {...titleDescriptionBoxStyle}>
-                <Text >{title}</Text>
-                <Text>{description}</Text>
+                <Text {...titleFooterStyle}>{title}</Text>
+                <Text {...descriptionFooterStyle} sx={{ WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{description}</Text>
             </Box>
 
             {/*category + icons*/}
-            <Box {...categoryIconsBoxStyle}>
+            <Box {...categoryIconsFooterBoxStyle }>
 
                 <Box {...categoriesBoxStyle}>
                     {category?.map((catTitle) => (

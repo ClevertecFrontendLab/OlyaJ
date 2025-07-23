@@ -31,7 +31,7 @@ export const NewRecipeDesktopCard = ({ image, title, description, category, like
                 {/*title + description*/}
                 <Box {...titleDescriptionStyle}>
                             <Text {...titleStyle}>{title}</Text>
-                    <Text {...descriptionStyle}>{description}</Text>
+                    <Text {...descriptionStyle} sx={{ WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{description}</Text>
                 </Box>
 
                 {/*category + icons*/}

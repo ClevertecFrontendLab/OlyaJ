@@ -58,7 +58,7 @@ export const VerticalDesktopCard = ({ image, title, description, category, likeC
                 {/*title + description*/}
                 <Box {...titleDescriptionStyle}>
                     <Text {...verticalCardTitleStyle}>{title}</Text>
-                    <Text {...descriptionStyle}>{description}</Text>
+                    <Text {...descriptionStyle} sx={{ WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{description}</Text>
                 </Box>
 
                 {/*buttons*/}
