@@ -2,35 +2,54 @@ import { PageHeader } from "./../../widgets/PageHeader/PageHeader";
 import { SubcategoryTabs } from "@shared/ui/Tabs/Tabs";
 import { useGetAllCategoriesQuery } from "../../entities/categories/api/categoriesApi";
 import { useParams } from "react-router-dom";
-import { Box, Spinner, Text, useBreakpointValue } from "@chakra-ui/react";
-import { useGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
+import { Box, Button, Spinner, Text, useBreakpointValue } from "@chakra-ui/react";
+import { useLazyGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
 import { VerticalDesktopCard } from "@shared/ui/Cards/VerticalCards/VerticalDesktopCard/VerticalDesktopCard";
 import { BASE_URL } from "@shared/constants/api";
-import { cardsBoxStyle, subcategoryBoxStyle } from "./subcategory.styles";
+import { cardsBoxStyle, subcategoryBoxStyle, subgategoryButtonStyle } from "./subcategory.styles";
 import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 import { VerticalTabletCard } from "@shared/ui/Cards/VerticalCards/VerticalTabletCard/VerticalTabletCard";
+import { useEffect, useState } from "react";
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
-  const { data: categories, isLoading, isError } = useGetAllCategoriesQuery();
+  const { data: categories, isError } = useGetAllCategoriesQuery();
+  const [page, setPage] = useState(1);
+  const [allRecipes, setAllRecipes] = useState<any[]>([]);
+  const [fetchRecipes, { isLoading }] = useLazyGetAllRecipesQuery();
+  const [hasMore, setHasMore] = useState(true)
 
   const currentCategory = categories?.find(cat => cat.category === categoryId);
   const currentSubcategory = currentCategory?.subCategories.find(sub => sub.category === subcategoryId);
   const subcategoryIds = currentCategory?.subCategories.map(sub => sub._id) ?? [];
 
-  const query = new URLSearchParams(location.search)
-  const searchString = query.get("search") || undefined
+  const searchString = new URLSearchParams(location.search).get("search") ?? undefined
+  const subcategoriesParam = searchString
+  ? subcategoryIds.join(',')
+  : currentSubcategory?._id ?? '';
 
-  const shouldSearchAcrossAllSubcategories = !!searchString;
+  const handleFirstLoad = ()=> {
+    fetchRecipes({page:1, limit:8, subcategoriesIds:subcategoriesParam, searchString}).then((res)=> {
+      const items = res?.data?.data ?? []
+      setAllRecipes(items)
+      setPage(1)
+      setHasMore(items.length === 8)
+  })}
 
-  const { data: recipes } = useGetAllRecipesQuery({
-    subcategoriesIds: shouldSearchAcrossAllSubcategories
-      ? subcategoryIds.join(',')
-      : currentSubcategory?._id ?? '',
-    page: 1,
-    limit: 8,
-    searchString,
-  });
+  useEffect(()=>{
+    handleFirstLoad()
+  },[subcategoryId, searchString])
+
+  
+  const handleLoadMore = () => {
+    const nextPage = page + 1
+    fetchRecipes({page:nextPage, limit:8, subcategoriesIds:subcategoriesParam, searchString}).then((res)=>{
+      const items = res?.data?.data ?? []
+      setAllRecipes((prev)=>[...prev, ...items])
+      setPage(nextPage)
+      if (items.length < 8) setHasMore(false)
+    })
+  }
 
   const { categoryMap } = useCategoryMap()
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -47,7 +66,7 @@ function SubcategoryPage() {
       <PageHeader />
       <SubcategoryTabs subCategories={currentCategory.subCategories} />
       <Box {...cardsBoxStyle}>
-        {recipes?.data.map(recipe => {
+        {allRecipes?.map(recipe => {
           const categoryTitles = recipe.categoriesIds
             .map((id) => categoryMap[id])
             .filter(Boolean);
@@ -76,6 +95,15 @@ function SubcategoryPage() {
         })}
       </Box>
 
+      <Box textAlign="center">
+          <Button 
+          {...subgategoryButtonStyle} 
+          onClick={handleLoadMore}
+          isDisabled={!hasMore}
+          >
+              Загрузить еще
+          </Button>
+      </Box>
     </Box>
   );
 }

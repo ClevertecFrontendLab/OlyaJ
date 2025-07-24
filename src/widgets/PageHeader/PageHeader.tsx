@@ -49,7 +49,7 @@ export const PageHeader = () => {
     };
     
 
-    const isActive = value.length > 3
+    const isActive = value.length > 2
 
     return (
         <Box

@@ -3,7 +3,9 @@ export const footerBoxStyle = {
     flexDirection: "column", 
     w:{base:"328px", md:"760px", lg:"1360px"},
     mt:{base:"32px", md:"32px", lg:"40px"},
-    px:{base:"16px", md:"2px",lg:"266px"},
+    pb:{base:"100px", md:"100px", lg:"20px"}, 
+    mx:"auto", 
+   
 } as const 
 
 

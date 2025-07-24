@@ -14,7 +14,7 @@ export const recipesApi = apiSlice.injectEndpoints({
         params,
       }),
     }),
-
+    
     // запрос по подкатегории (id в path, остальное в query)
     getRecipesByCategoryId: builder.query<RecipesResponse, { id: string } & GetAllRecipesParams>({
       query: ({ id, ...params }) => ({
@@ -33,5 +33,6 @@ export const recipesApi = apiSlice.injectEndpoints({
 export const {
   useGetAllRecipesQuery,
   useGetRecipesByCategoryIdQuery,
-  useGetRecipeByIdQuery
+  useGetRecipeByIdQuery,
+  useLazyGetAllRecipesQuery
 } = recipesApi;

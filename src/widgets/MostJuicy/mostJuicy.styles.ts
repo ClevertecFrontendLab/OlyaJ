@@ -16,7 +16,7 @@ export const headingButtonBoxStyle = {
     justifySelf:{base: "start",  md:"start", lg: "start" },
     alignItems:"center",
     width: "100%", 
-    w:{base:"328px", md:"728px", lg:"1360px"}
+    w:{base:"328px", md:"728px", lg:"1330px"}
 } as const 
 
 
@@ -27,5 +27,8 @@ export const buttonStyle = {
     _hover: {
     background: "#D1FF6A", 
     },
+    _active: {
+        background: "#D1FF6A", 
+        },
     transition: "background 0.2s ease",
 } as const;
