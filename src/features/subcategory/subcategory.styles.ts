@@ -8,8 +8,8 @@ export const cardsBoxStyle = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "flex-start", 
-    gap: "24px",
+    gap: {base:"16px",lg:"24px"},
     maxW: "1360px",       
-    mx: "auto",                
+    mx: "16px",                
   } as const;
   

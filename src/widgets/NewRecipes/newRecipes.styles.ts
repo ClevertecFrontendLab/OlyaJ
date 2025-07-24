@@ -33,7 +33,7 @@ export const leftArrowStyle = {
     transform:"translateY(-50%)",
     zIndex:"10",
     cursor:"pointer",
-    display: {base:"none", md:"none"},
+    display: {base:"none", md:"none", lg:"flex"},
 } as const 
 
 

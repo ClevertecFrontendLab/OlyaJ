@@ -11,7 +11,7 @@ export const newRecipeBoxCardStyle = {
 
 
 export const imageRecipeBoxCardStyle ={
-    w:"158px", 
+    w: "158px",
     h:"128px"
 }
 

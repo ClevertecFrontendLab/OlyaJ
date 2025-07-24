@@ -51,6 +51,7 @@ export const NewRecipes = () => {
               <SwiperSlide key={recipe._id}>
                 {isDesktop ? (
                   <NewRecipeDesktopCard
+                    key={recipe._id}
                     title={recipe.title}
                     description={recipe.description}
                     image={BASE_URL + recipe.image}
@@ -62,6 +63,7 @@ export const NewRecipes = () => {
                   />
                 ) : (
                   <NewRecipeTabletCard
+                    key={recipe._id}
                     title={recipe.title}
                     image={BASE_URL + recipe.image}
                     likeCount={recipe.likes}

@@ -6,7 +6,8 @@ export const blogBoxStyle = {
     flexDirection: "column",
     p: {base:"12px",md:"12px",lg:"24px"},
     gap:{base:"2px", md:"2px", lg:"32px"},
-    mt:"64px"
+    mt:{base:"32px",lg:"64px"},
+    mx:"16px"
 } as const 
 
 
@@ -33,7 +34,7 @@ export const linkStyle = {
     fontSize: "18px",
     fontWeight: "600",
     lineHeight: "28px",
-    justifySelf: {base: "center", md:"center", lg: "flex-end" }
+    justifySelf: {base: "center", md:"center", lg: "flex-end" },
 }
 
 

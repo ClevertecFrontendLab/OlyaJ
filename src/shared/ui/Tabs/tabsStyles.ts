@@ -7,5 +7,5 @@ export const tabListStyle = {
     overflowY:"hidden",
     whiteSpace:"nowrap",
     mb:"24px",
-    minW:"1380px"
+    minW:{base:"328px",md:"728px",lg:"1380px"},
 } as const 

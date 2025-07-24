@@ -1,5 +1,5 @@
 export const verticalCardBoxStyle = {
-    w: "668px",
+    w: "652px",
     display: "flex",
     flexDirection: "row",
     borderRadius: "8px",
@@ -29,7 +29,7 @@ export const verticalCardDescriptionStyle = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    mx: "24px",
+    mx: "22px",
     my: "20px",
 } as const
 

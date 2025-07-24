@@ -2,12 +2,13 @@ import { PageHeader } from "./../../widgets/PageHeader/PageHeader";
 import { SubcategoryTabs } from "@shared/ui/Tabs/Tabs";
 import { useGetAllCategoriesQuery } from "../../entities/categories/api/categoriesApi";
 import { useParams } from "react-router-dom";
-import { Box, Spinner, Text } from "@chakra-ui/react";
+import { Box, Spinner, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
 import { VerticalDesktopCard } from "@shared/ui/Cards/VerticalCards/VerticalDesktopCard/VerticalDesktopCard";
 import { BASE_URL } from "@shared/constants/api";
 import { cardsBoxStyle, subcategoryBoxStyle } from "./subcategory.styles";
 import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
+import { VerticalTabletCard } from "@shared/ui/Cards/VerticalCards/VerticalTabletCard/VerticalTabletCard";
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
@@ -32,6 +33,7 @@ function SubcategoryPage() {
   });
 
   const { categoryMap } = useCategoryMap()
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
 
 
   if (isLoading) return <Spinner />;
@@ -50,19 +52,26 @@ function SubcategoryPage() {
             .map((id) => categoryMap[id])
             .filter(Boolean);
 
-          return (
-            <VerticalDesktopCard
-              key={recipe._id}
-              title={recipe.title}
-              description={recipe.description}
-              image={BASE_URL + recipe.image}
-              likeCount={recipe.likes}
-              saveCount={recipe.bookmarks}
-              category={categoryTitles}
-              categoryId={categoryId || ''}
-              subcategoryId={subcategoryId || ''}
-              recipeId={recipe._id || ''}
-            />
+            return isDesktop ? (
+              <VerticalDesktopCard
+                  key={recipe._id}
+                  title={recipe.title}
+                  description={recipe.description}
+                  image={BASE_URL + recipe.image}
+                  likeCount={recipe.likes}
+                  saveCount={recipe.bookmarks}
+                  category={categoryTitles}
+                  recipeId={recipe._id || ''}
+              />
+          ) : (
+              <VerticalTabletCard
+                  key={recipe._id}
+                  title={recipe.title}
+                  image={BASE_URL + recipe.image}
+                  likeCount={recipe.likes}
+                  saveCount={recipe.bookmarks}
+                  recipeId={recipe._id || ''}
+              />
           );
         })}
       </Box>

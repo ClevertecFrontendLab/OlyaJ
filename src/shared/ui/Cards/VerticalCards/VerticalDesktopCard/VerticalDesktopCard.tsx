@@ -12,7 +12,6 @@ export type VerticalDesktopCardProps = {
     title: string;
     description: string;
     category?: string[];
-    icon?: string[];
     likeCount?: number;
     saveCount?: number;
     categoryId?: string;
