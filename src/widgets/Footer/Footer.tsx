@@ -48,6 +48,7 @@ export const Footer = () => {
 
                         return (
                             <FooterTextCard
+                                key={recipe._id}
                                 title={recipe.title}
                                 description={recipe.description}
                                 likeCount={recipe.likes}
