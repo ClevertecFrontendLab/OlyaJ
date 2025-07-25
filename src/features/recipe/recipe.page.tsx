@@ -1,9 +1,11 @@
+import { Box } from "@chakra-ui/react";
+
 
 function RecipePage() {
   return (
-    <div>
+    <Box>
       Hi, I'm recipe
-    </div>
+    </Box>
   );
 }
 

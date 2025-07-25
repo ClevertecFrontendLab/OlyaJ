@@ -30,8 +30,22 @@ export const NewRecipeDesktopCard = ({ image, title, description, category, like
 
                 {/*title + description*/}
                 <Box {...titleDescriptionStyle}>
+                    {categoryId && subcategoryId && recipeId && (
+                        <Link to={href(ROUTES.RECIPE, {
+                            categoryId,
+                            subcategoryId,
+                            recipeId
+                        }
+                        )}>
+
                             <Text {...titleStyle}>{title}</Text>
-                    <Text {...descriptionStyle} sx={{ WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>{description}</Text>
+                        </Link>
+                    )}
+
+                    <Text {...descriptionStyle}>
+                        {description}
+                    </Text>
+
                 </Box>
 
                 {/*category + icons*/}

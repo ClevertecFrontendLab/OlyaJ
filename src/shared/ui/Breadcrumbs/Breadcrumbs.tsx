@@ -3,13 +3,15 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     Spinner,
-    Text,
+    useBreakpointValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
 import { href } from 'react-router-dom';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
 import { useGetRecipeByIdQuery } from './../../../entities/recipes/api/recipesApi'
+import { Error } from './../../../shared/ui/Error/Error'
+
 
 export const Breadcrumbs = () => {
     const { categoryId, subcategoryId, recipeId } = useParams();
@@ -19,11 +21,14 @@ export const Breadcrumbs = () => {
     });
 
     if (isLoading) return <Spinner />;
-    if (error) return <Text color="red.500">Ошибка загрузки категорий</Text>;
+    if (error) return <Error />;
 
-    const currentCategory = categories?.find(cat => cat.category === categoryId);
-    const currentSubcategory = currentCategory?.subCategories?.find(
-        sub => sub.category === subcategoryId
+    const currentCategory = categories?.find(cat =>
+        cat._id === categoryId || cat.category === categoryId
+    );
+
+    const currentSubcategory = currentCategory?.subCategories?.find(sub =>
+        sub._id === subcategoryId || sub.category === subcategoryId
     );
 
     const firstSub = currentCategory?.subCategories?.[0];
@@ -37,13 +42,28 @@ export const Breadcrumbs = () => {
     const location = useLocation()
     const juicyPage = location.pathname === ROUTES.MOST_JUICY
 
+    const flexDirection = useBreakpointValue({ base: 'column || row', md: 'column || row', lg: "row" });
+
     return (
-        <Breadcrumb fontSize="m" separator=">" mb={4}>
+        <Breadcrumb
+            separator=">"
+            sx={{
+                '& > ol': {
+                    display: 'flex',
+                    flexDirection: flexDirection,
+                    flexWrap: 'wrap',
+                    gap: '4px',
+                    alignItems: 'flex-start',
+                    fontSzie:"16px"
+                },
+            }}
+        >
             <BreadcrumbItem>
                 <BreadcrumbLink as={RouterLink} to={ROUTES.MAIN}>
                     Главная
                 </BreadcrumbLink>
             </BreadcrumbItem>
+
 
             {currentCategory && (
                 <BreadcrumbItem>
@@ -75,5 +95,6 @@ export const Breadcrumbs = () => {
                 </BreadcrumbItem>
             )}
         </Breadcrumb>
+
     );
 };

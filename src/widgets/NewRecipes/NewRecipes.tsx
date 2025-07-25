@@ -12,12 +12,14 @@ import "./newRecipes.css"
 import { BASE_URL } from "./../../shared/constants/api"
 import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 import { NewRecipeTabletCard } from "@shared/ui/Cards/NewRecipeTabletCard/NewRecipeTabletCard"
+import { getCategoryPairFromRecipe } from "@shared/lib/getCategoryPairFromRecipe"
 
 
 export const NewRecipes = () => {
   const { data: recipes } = useGetAllRecipesQuery({ sortBy: 'createdAt', sortOrder: 'desc' })
-  const { categoryMap } = useCategoryMap()
+  const { categories} = useCategoryMap()
   const isDesktop = useBreakpointValue({ base: false, lg: true });
+
 
   const slidesPerView = useBreakpointValue({
     base: 2,
@@ -25,7 +27,6 @@ export const NewRecipes = () => {
     lg: 4,       
   });
   
-
 
   return (
     <Box as="section" {...boxStyles}>
@@ -43,9 +44,7 @@ export const NewRecipes = () => {
           }}
         >
           {recipes?.data?.map((recipe) => {
-            const categoryTitles = recipe.categoriesIds
-              .map(id => categoryMap[id])
-              .filter(Boolean)
+              const { categoryId, subcategoryId, categoryTitles } = getCategoryPairFromRecipe(recipe, categories ?? []);
 
             return (
               <SwiperSlide key={recipe._id}>
@@ -59,7 +58,8 @@ export const NewRecipes = () => {
                     saveCount={recipe.bookmarks}
                     category={categoryTitles}
                     recipeId={recipe._id}
-
+                    categoryId={categoryId}
+                    subcategoryId={subcategoryId}
                   />
                 ) : (
                   <NewRecipeTabletCard
@@ -68,6 +68,9 @@ export const NewRecipes = () => {
                     image={BASE_URL + recipe.image}
                     likeCount={recipe.likes}
                     saveCount={recipe.bookmarks}
+                    recipeId={recipe._id}
+                    categoryId={categoryId}
+                    subcategoryId={subcategoryId}
                   />
                 )}
               </SwiperSlide>
