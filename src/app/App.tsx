@@ -11,7 +11,6 @@ import { TabletFooter } from '@shared/ui/TabletFooter/TabletFooter';
 
 
 function App() {
-
     return (
         <>
             <Header />

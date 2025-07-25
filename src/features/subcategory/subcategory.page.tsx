@@ -10,6 +10,7 @@ import { cardsBoxStyle, subcategoryBoxStyle, subgategoryButtonStyle } from "./su
 import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 import { VerticalTabletCard } from "@shared/ui/Cards/VerticalCards/VerticalTabletCard/VerticalTabletCard";
 import { useEffect, useState } from "react";
+import { Error } from "@shared/ui/Error/Error";
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
@@ -18,6 +19,7 @@ function SubcategoryPage() {
   const [allRecipes, setAllRecipes] = useState<any[]>([]);
   const [fetchRecipes, { isLoading }] = useLazyGetAllRecipesQuery();
   const [hasMore, setHasMore] = useState(true)
+  const [error, setShowError] = useState(false)
 
   const currentCategory = categories?.find(cat => cat.category === categoryId);
   const currentSubcategory = currentCategory?.subCategories.find(sub => sub.category === subcategoryId);
@@ -28,13 +30,25 @@ function SubcategoryPage() {
   ? subcategoryIds.join(',')
   : currentSubcategory?._id ?? '';
 
-  const handleFirstLoad = ()=> {
-    fetchRecipes({page:1, limit:8, subcategoriesIds:subcategoriesParam, searchString}).then((res)=> {
-      const items = res?.data?.data ?? []
+  const handleFirstLoad = async() => {
+    try{
+      const response = await fetchRecipes({
+        page:1, 
+        limit:8, 
+        subcategoriesIds:subcategoriesParam,
+        searchString
+      }).unwrap()
+      
+      const items = response.data ?? []
+
       setAllRecipes(items)
       setPage(1)
       setHasMore(items.length === 8)
-  })}
+      setShowError(false)
+    } catch(error) {
+        setShowError(true)
+    }
+  }
 
   useEffect(()=>{
     handleFirstLoad()
@@ -56,12 +70,15 @@ function SubcategoryPage() {
 
 
   if (isLoading) return <Spinner />;
-  if (isError || !categories) return <Text>Ошибка загрузки категорий</Text>;
+  if (isError || !categories) return <Error/>;
   if (!currentCategory) return <Text>Категория не найдена</Text>;
   if (!currentSubcategory) return <Text>Подкатегория не найдена</Text>;
 
 
   return (
+    <>
+    {error && <Error/>}
+
     <Box {...subcategoryBoxStyle}>
       <PageHeader />
       <SubcategoryTabs subCategories={currentCategory.subCategories} />
@@ -105,6 +122,8 @@ function SubcategoryPage() {
           </Button>
       </Box>
     </Box>
+
+    </>
   );
 }
 
