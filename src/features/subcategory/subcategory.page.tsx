@@ -30,40 +30,50 @@ function SubcategoryPage() {
   ? subcategoryIds.join(',')
   : currentSubcategory?._id ?? '';
 
-  const handleFirstLoad = async() => {
-    try{
-      const response = await fetchRecipes({
-        page:1, 
-        limit:8, 
-        subcategoriesIds:subcategoriesParam,
-        searchString
-      }).unwrap()
-      
-      const items = response.data ?? []
-
-      setAllRecipes(items)
-      setPage(1)
-      setHasMore(items.length === 8)
-      setShowError(false)
-    } catch(error) {
-        setShowError(true)
+  const handleFirstLoad = async () => {
+    try {
+      const { data = [] } = await fetchRecipes({
+        page: 1,
+        limit: 8,
+        subcategoriesIds: subcategoriesParam,
+        searchString,
+      }).unwrap();
+  
+      setAllRecipes(data);
+      setPage(1);
+      setHasMore(data.length === 8);
+      setShowError(false);
+    } catch (error) {
+      setShowError(true);
     }
-  }
+  };
+  
 
   useEffect(()=>{
     handleFirstLoad()
   },[subcategoryId, searchString])
 
   
-  const handleLoadMore = () => {
-    const nextPage = page + 1
-    fetchRecipes({page:nextPage, limit:8, subcategoriesIds:subcategoriesParam, searchString}).then((res)=>{
-      const items = res?.data?.data ?? []
-      setAllRecipes((prev)=>[...prev, ...items])
-      setPage(nextPage)
-      if (items.length < 8) setHasMore(false)
-    })
-  }
+  const handleLoadMore = async () => {
+    try {
+      const nextPage = page + 1;
+  
+      const { data = [] } = await fetchRecipes({
+        page: nextPage,
+        limit: 8,
+        subcategoriesIds: subcategoriesParam,
+        searchString,
+      }).unwrap();
+  
+      setAllRecipes((prev) => [...prev, ...data]);
+      setPage(nextPage);
+      setHasMore(data.length === 8);
+      setShowError(false);
+    } catch (error) {
+      setShowError(true);
+    }
+  };
+  
 
   const { categoryMap } = useCategoryMap()
   const isDesktop = useBreakpointValue({ base: false, lg: true });
