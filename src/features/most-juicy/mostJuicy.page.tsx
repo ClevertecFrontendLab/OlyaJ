@@ -1,11 +1,15 @@
+import { Box } from "@chakra-ui/react";
 import { PageHeader } from "./../../widgets/PageHeader/PageHeader"
+import { subcategoryBoxStyle } from "@features/subcategory/subcategory.styles";
 
 
 function MostJuicyPage() {
+
+  
     return (
-      <div>
+      <Box {...subcategoryBoxStyle}>
         <PageHeader/>
-      </div>
+      </Box>
     );
   }
   
