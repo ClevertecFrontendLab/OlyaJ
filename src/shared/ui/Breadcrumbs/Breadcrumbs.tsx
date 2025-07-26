@@ -9,9 +9,8 @@ import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { ROUTES } from '@shared/model/routes';
 import { href } from 'react-router-dom';
 import { useGetAllCategoriesQuery } from '../../../entities/categories/api/categoriesApi';
-import { useGetRecipeByIdQuery } from './../../../entities/recipes/api/recipesApi'
-import { Error } from './../../../shared/ui/Error/Error'
-
+import { useGetRecipeByIdQuery } from './../../../entities/recipes/api/recipesApi';
+import { Error } from './../../../shared/ui/Error/Error';
 
 export const Breadcrumbs = () => {
     const { categoryId, subcategoryId, recipeId } = useParams();
@@ -20,33 +19,37 @@ export const Breadcrumbs = () => {
         skip: !recipeId,
     });
 
+    const flexDirection = useBreakpointValue({
+        base: 'column || row',
+        md: 'column || row',
+        lg: 'row',
+    });
+
     if (isLoading) return <Spinner />;
     if (error) return <Error />;
 
-    const currentCategory = categories?.find(cat =>
-        cat._id === categoryId || cat.category === categoryId
+    const currentCategory = categories?.find(
+        (cat) => cat._id === categoryId || cat.category === categoryId,
     );
 
-    const currentSubcategory = currentCategory?.subCategories?.find(sub =>
-        sub._id === subcategoryId || sub.category === subcategoryId
+    const currentSubcategory = currentCategory?.subCategories?.find(
+        (sub) => sub._id === subcategoryId || sub.category === subcategoryId,
     );
 
     const firstSub = currentCategory?.subCategories?.[0];
     const categoryHref = firstSub
         ? href(ROUTES.SUBCATEGORY, {
-            categoryId: currentCategory.category,
-            subcategoryId: firstSub.category,
-        })
+              categoryId: currentCategory.category,
+              subcategoryId: firstSub.category,
+          })
         : ROUTES.MAIN;
 
-    const location = useLocation()
-    const juicyPage = location.pathname === ROUTES.MOST_JUICY
-
-    const flexDirection = useBreakpointValue({ base: 'column || row', md: 'column || row', lg: "row" });
+    const location = useLocation();
+    const juicyPage = location.pathname === ROUTES.MOST_JUICY;
 
     return (
         <Breadcrumb
-            separator=">"
+            separator='>'
             sx={{
                 '& > ol': {
                     display: 'flex',
@@ -54,7 +57,7 @@ export const Breadcrumbs = () => {
                     flexWrap: 'wrap',
                     gap: '4px',
                     alignItems: 'flex-start',
-                    fontSzie:"16px"
+                    fontSzie: '16px',
                 },
             }}
         >
@@ -63,7 +66,6 @@ export const Breadcrumbs = () => {
                     Главная
                 </BreadcrumbLink>
             </BreadcrumbItem>
-
 
             {currentCategory && (
                 <BreadcrumbItem>
@@ -75,9 +77,7 @@ export const Breadcrumbs = () => {
 
             {subcategoryId && (
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink>
-                        {currentSubcategory?.title ?? subcategoryId}
-                    </BreadcrumbLink>
+                    <BreadcrumbLink>{currentSubcategory?.title ?? subcategoryId}</BreadcrumbLink>
                 </BreadcrumbItem>
             )}
 
@@ -89,12 +89,9 @@ export const Breadcrumbs = () => {
 
             {juicyPage && (
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink>
-                        Самое сочное
-                    </BreadcrumbLink>
+                    <BreadcrumbLink>Самое сочное</BreadcrumbLink>
                 </BreadcrumbItem>
             )}
         </Breadcrumb>
-
     );
 };
