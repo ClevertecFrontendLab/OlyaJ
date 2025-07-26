@@ -11,6 +11,7 @@ import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 import { VerticalTabletCard } from "@shared/ui/Cards/VerticalCards/VerticalTabletCard/VerticalTabletCard";
 import { useEffect, useState } from "react";
 import { Error } from "@shared/ui/Error/Error";
+import { getCategoryPairFromRecipe } from "@shared/lib/getCategoryPairFromRecipe";
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
@@ -27,8 +28,8 @@ function SubcategoryPage() {
 
   const searchString = new URLSearchParams(location.search).get("search") ?? undefined
   const subcategoriesParam = searchString
-  ? subcategoryIds.join(',')
-  : currentSubcategory?._id ?? '';
+    ? subcategoryIds.join(',')
+    : currentSubcategory?._id ?? '';
 
   const handleFirstLoad = async () => {
     try {
@@ -38,7 +39,7 @@ function SubcategoryPage() {
         subcategoriesIds: subcategoriesParam,
         searchString,
       }).unwrap();
-  
+
       setAllRecipes(data);
       setPage(1);
       setHasMore(data.length === 8);
@@ -47,24 +48,24 @@ function SubcategoryPage() {
       setShowError(true);
     }
   };
-  
 
-  useEffect(()=>{
+
+  useEffect(() => {
     handleFirstLoad()
-  },[subcategoryId, searchString])
+  }, [subcategoryId, searchString])
 
-  
+
   const handleLoadMore = async () => {
     try {
       const nextPage = page + 1;
-  
+
       const { data = [] } = await fetchRecipes({
         page: nextPage,
         limit: 8,
         subcategoriesIds: subcategoriesParam,
         searchString,
       }).unwrap();
-  
+
       setAllRecipes((prev) => [...prev, ...data]);
       setPage(nextPage);
       setHasMore(data.length === 8);
@@ -73,65 +74,70 @@ function SubcategoryPage() {
       setShowError(true);
     }
   };
-  
+
 
   const { categoryMap } = useCategoryMap()
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
 
   if (isLoading) return <Spinner />;
-  if (isError || !categories) return <Error/>;
+  if (isError || !categories) return <Error />;
   if (!currentCategory) return <Text>Категория не найдена</Text>;
   if (!currentSubcategory) return <Text>Подкатегория не найдена</Text>;
 
 
   return (
     <>
-    {error && <Error/>}
+      {error && <Error />}
 
-    <Box {...subcategoryBoxStyle}>
-      <PageHeader />
-      <SubcategoryTabs subCategories={currentCategory.subCategories} />
-      <Box {...cardsBoxStyle}>
-        {allRecipes?.map(recipe => {
-          const categoryTitles = recipe.categoriesIds
-            .map((id) => categoryMap[id])
-            .filter(Boolean);
+      <Box {...subcategoryBoxStyle}>
+        <PageHeader />
+        <SubcategoryTabs subCategories={currentCategory.subCategories} />
+        <Box {...cardsBoxStyle}>
+          {allRecipes?.map(recipe => {
 
+            const { categoryId, subcategoryId, categoryTitles } = getCategoryPairFromRecipe(
+              recipe,
+              categories ?? [],
+            );
             return isDesktop ? (
               <VerticalDesktopCard
-                  key={recipe._id}
-                  title={recipe.title}
-                  description={recipe.description}
-                  image={BASE_URL + recipe.image}
-                  likeCount={recipe.likes}
-                  saveCount={recipe.bookmarks}
-                  category={categoryTitles}
-                  recipeId={recipe._id || ''}
+                key={recipe._id}
+                title={recipe.title}
+                description={recipe.description}
+                image={BASE_URL + recipe.image}
+                likeCount={recipe.likes}
+                saveCount={recipe.bookmarks}
+                category={categoryTitles}
+                recipeId={recipe._id || ''}
+                categoryId={categoryId}
+                subcategoryId={subcategoryId}
               />
-          ) : (
+            ) : (
               <VerticalTabletCard
-                  key={recipe._id}
-                  title={recipe.title}
-                  image={BASE_URL + recipe.image}
-                  likeCount={recipe.likes}
-                  saveCount={recipe.bookmarks}
-                  recipeId={recipe._id || ''}
+                key={recipe._id}
+                title={recipe.title}
+                image={BASE_URL + recipe.image}
+                likeCount={recipe.likes}
+                saveCount={recipe.bookmarks}
+                recipeId={recipe._id || ''}
+                categoryId={categoryId}
+                subcategoryId={subcategoryId}
               />
-          );
-        })}
-      </Box>
+            );
+          })}
+        </Box>
 
-      <Box textAlign="center">
-          <Button 
-          {...subgategoryButtonStyle} 
-          onClick={handleLoadMore}
-          isDisabled={!hasMore}
+        <Box textAlign="center">
+          <Button
+            {...subgategoryButtonStyle}
+            onClick={handleLoadMore}
+            isDisabled={!hasMore}
           >
-              Загрузить еще
+            Загрузить еще
           </Button>
+        </Box>
       </Box>
-    </Box>
 
     </>
   );
