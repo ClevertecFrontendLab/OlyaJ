@@ -1,32 +1,34 @@
 import { PageHeader } from "./../../widgets/PageHeader/PageHeader";
 import { SubcategoryTabs } from "@shared/ui/Tabs/Tabs";
 import { useGetAllCategoriesQuery } from "../../entities/categories/api/categoriesApi";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Box, Button, Spinner, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useLazyGetAllRecipesQuery } from "./../../entities/recipes/api/recipesApi";
 import { VerticalDesktopCard } from "@shared/ui/Cards/VerticalCards/VerticalDesktopCard/VerticalDesktopCard";
 import { BASE_URL } from "@shared/constants/api";
 import { cardsBoxStyle, subcategoryBoxStyle, subgategoryButtonStyle } from "./subcategory.styles";
-import { useCategoryMap } from "./../../shared/hooks/useCategoryMap"
 import { VerticalTabletCard } from "@shared/ui/Cards/VerticalCards/VerticalTabletCard/VerticalTabletCard";
 import { useEffect, useState } from "react";
 import { Error } from "@shared/ui/Error/Error";
 import { getCategoryPairFromRecipe } from "@shared/lib/getCategoryPairFromRecipe";
+import { Recipe } from "src/entities/recipes/model/recipesTypes";
 
 function SubcategoryPage() {
   const { categoryId, subcategoryId } = useParams();
   const { data: categories, isError } = useGetAllCategoriesQuery();
   const [page, setPage] = useState(1);
-  const [allRecipes, setAllRecipes] = useState<any[]>([]);
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
   const [fetchRecipes, { isLoading }] = useLazyGetAllRecipesQuery();
   const [hasMore, setHasMore] = useState(true)
   const [error, setShowError] = useState(false)
+  const [searchParams] = useSearchParams()
 
   const currentCategory = categories?.find(cat => cat.category === categoryId);
   const currentSubcategory = currentCategory?.subCategories.find(sub => sub.category === subcategoryId);
   const subcategoryIds = currentCategory?.subCategories.map(sub => sub._id) ?? [];
 
-  const searchString = new URLSearchParams(location.search).get("search") ?? undefined
+  const searchString = searchParams.get("search") || undefined
+  
   const subcategoriesParam = searchString
     ? subcategoryIds.join(',')
     : currentSubcategory?._id ?? '';
@@ -76,9 +78,7 @@ function SubcategoryPage() {
   };
 
 
-  const { categoryMap } = useCategoryMap()
   const isDesktop = useBreakpointValue({ base: false, lg: true });
-
 
   if (isLoading) return <Spinner />;
   if (isError || !categories) return <Error />;
@@ -91,7 +91,7 @@ function SubcategoryPage() {
       {error && <Error />}
 
       <Box {...subcategoryBoxStyle}>
-        <PageHeader />
+        <PageHeader/>
         <SubcategoryTabs subCategories={currentCategory.subCategories} />
         <Box {...cardsBoxStyle}>
           {allRecipes?.map(recipe => {
