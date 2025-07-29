@@ -1,6 +1,6 @@
 export const getLeftSidebarStyles = (variant: 'desktop' | 'mobile') => ({
-  position: variant === 'mobile' ? 'fixed' : 'fixed', 
-  top: variant === 'mobile' ? '64px' : '0',
+  position: "fixed", 
+  top: "64px",
   right: variant === 'mobile' ? '0' : 'auto',
   left: variant === 'mobile' ? 'auto' : '0',
   zIndex: variant === 'mobile' ? 'overlay' : '10',
