@@ -1,8 +1,9 @@
 import { Box, Image, Spinner } from "@chakra-ui/react";
-import { pictureDescriptionBoxStyle, recipePageStyle } from "./recipe.styles";
+import { imageRecipeStyle, pictureDescriptionBoxStyle, recipePageStyle } from "./recipe.styles";
 import { useParams } from "react-router-dom";
-import { useGetRecipeByIdQuery } from "src/entities/recipes/api/recipesApi";
+import { useGetRecipeByIdQuery } from "./../../entities/recipes/api/recipesApi";
 import { Error } from "@shared/ui/Error/Error";
+import { BASE_URL } from "@shared/constants/api";
 
 function RecipePage() {
   const { recipeId } = useParams<{ recipeId?: string }>();
@@ -19,8 +20,10 @@ function RecipePage() {
     <Box {...recipePageStyle}>
       {/* картинка + описание */}
       <Box {...pictureDescriptionBoxStyle}>
-        <Image src={recipe.image} alt={recipe.title} />
-        <Box>{recipe.description}</Box>
+        <Image src={BASE_URL + recipe.image} alt={recipe.title} {...imageRecipeStyle}/>
+        <Box>
+          {recipe.description}
+        </Box>
       </Box>
     </Box>
   );
