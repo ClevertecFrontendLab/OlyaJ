@@ -22,4 +22,14 @@ export const imageRecipeStyle = {
 }
 
 
+export const categoriesIconsStyle = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+} as const 
+
+
+
+
+
 
