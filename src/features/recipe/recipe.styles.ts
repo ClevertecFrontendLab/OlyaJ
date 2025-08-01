@@ -25,8 +25,17 @@ export const imageRecipeStyle = {
 export const categoriesIconsStyle = {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    w:{base:"328px",md:"480px", lg:"783px"}
 } as const 
+
+
+export const recipeCategoriesStyle = {
+    display: "flex", 
+    flexDirection: { base: "column", md: "row", lg: "row"},
+    gap: {base:"2px", md:"6px",lg:"8px"}, 
+    flexWrap: "wrap", 
+} as const;
 
 
 

@@ -9,7 +9,7 @@ export function getCategoryPairFromRecipe(
     subcategoryId: string | undefined;
     categoryTitles: string[];
 } {
-    const subcategoryId = recipe.categoriesIds?.find((id) =>
+    const subcategoryId = recipe?.categoriesIds?.find((id) =>
         categories?.some((cat) => cat.subCategories?.some((sub) => sub && sub._id === id)),
     );
 
@@ -19,7 +19,7 @@ export function getCategoryPairFromRecipe(
 
     const categoryId = category?._id;
 
-    const categoryTitles = recipe.categoriesIds
+    const categoryTitles = recipe?.categoriesIds
         .map((id) => {
             const foundCategory =
                 categories.find((cat) => cat._id === id) ??
