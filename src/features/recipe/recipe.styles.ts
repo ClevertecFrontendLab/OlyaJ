@@ -26,6 +26,7 @@ export const categoriesIconsStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems:"start", 
     w:{base:"328px",md:"480px", lg:"783px"}
 } as const 
 
