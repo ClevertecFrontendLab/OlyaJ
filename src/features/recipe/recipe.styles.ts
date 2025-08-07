@@ -14,6 +14,7 @@ export const pictureDescriptionBoxStyle = {
 } as const 
 
 
+
 export const imageRecipeStyle = {
     w:{base:"328px", md:"232px", lg:"553px"},
     h:{base:"224px", md:"224px", lg:"410px"},
@@ -39,6 +40,21 @@ export const recipeCategoriesStyle = {
 } as const;
 
 
+export const categoryBoxStyle = {
+    display:"inline-block",
+    borderRadius: "4px",   
+    background: "#FFFFD3",
+    py: "1px",
+    px: "4px",
+    fontSize:"14px"
+} 
+
+
+export const titleDescriptionBoxStyle = {
+    display: "flex",
+    flexDirection:"column",
+    gap:{base:"16px", md:"16px", lg:"24px"}
+} as const 
 
 
 

@@ -96,7 +96,7 @@ export const categoryStyle = {
 export const likeSaveIconsBox = {
     display: "flex",
     flexDirection: "row",
-    gap: "6px",
+    gap: "8px",
     minW: "74px",
 } as const
 
