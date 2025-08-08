@@ -14,6 +14,13 @@ export const pictureDescriptionBoxStyle = {
 } as const 
 
 
+export const descriptionBoxStyle = {
+    display: "flex",
+    flexDirection:"column",
+    h:{base:"344px", md:"224px", lg:"410px"},
+    justifyContent: "space-between",
+} as const
+
 
 export const imageRecipeStyle = {
     w:{base:"328px", md:"232px", lg:"553px"},
@@ -53,8 +60,22 @@ export const categoryBoxStyle = {
 export const titleDescriptionBoxStyle = {
     display: "flex",
     flexDirection:"column",
-    gap:{base:"16px", md:"16px", lg:"24px"}
+    gap:{base:"16px", md:"16px", lg:"24px"},
+    w:{base:"328px", md:"480px", lg:"503px"}
 } as const 
+
+
+export const titleRecipeStyle = {
+    fontSize:{base:"24px", md:"24px", lg:"48px" },
+    fontWeight:"700",
+    lineHeight:{base:"32px", md:"32px", lg:"48px"},
+}
+
+
+export const descriptionRecipeStyle = {
+    fontSize:"14px",
+    fontWeight:"400",
+}
 
 
 
