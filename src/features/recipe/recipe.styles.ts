@@ -4,6 +4,7 @@ export const recipePageStyle = {
     justifyContent: 'center',
     mt: { base: '16px', md: '18px', lg: '56px' },
     maxW: { base: '328px', md: '728px', lg: '1360px' },
+    alignItems:"center",
 } as const;
 
 export const pictureDescriptionBoxStyle = {
@@ -100,6 +101,8 @@ export const calorieBoxStyle = {
     display:"flex",
     flexDirection: "column",
     mt:{base:"24px", md:"24px", lg:"40px"},
+    w:{base:"328px",md:"728px",lg:"668px"},
+    gap:{base:"12px", md:"12px", lg:"24px"}
 } as const 
 
 
@@ -111,10 +114,5 @@ export const caloryTextStyle = {
 }
 
 
-export const nutritionalValueBoxStyle = {
-    display:"flex",
-    flexDirection:{base:"column", md:"row", lg:"row"},
-    gap: {base:"12px", md:"12px", lg:"24px"},
-} as const 
 
 

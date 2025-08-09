@@ -9,7 +9,6 @@ import {
     descriptionBoxStyle,
     descriptionRecipeStyle,
     imageRecipeStyle,
-    nutritionalValueBoxStyle,
     pictureDescriptionBoxStyle,
     recipeCategoriesStyle,
     recipePageStyle,
@@ -33,6 +32,7 @@ import {
     iconStyle,
     likeSaveIconsBox,
 } from '@shared/ui/Cards/NewRecipeDescktopCard/newRecipeDesktopCard.styles';
+import { NutritionValues } from './NutritionValue/nutritionValue';
 
 
 
@@ -117,9 +117,8 @@ function RecipePage() {
             <Box {...calorieBoxStyle}>
                 <Text {...caloryTextStyle}>* Калорийность на 1 порцию</Text>
 
-                <Box {...nutritionalValueBoxStyle}>
-                    
-
+                <Box >
+                    <NutritionValues {...recipe.nutritionValue}/>
                 </Box>
             </Box>
 
