@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { nutritionalValueBoxStyle } from "./nutritionValue.styles";
+import { labelTextNutritionBoxStyle, nutritionSquareBoxStyle, nutritionalValueBoxStyle } from "./nutritionValue.styles";
 
 
 type Props = {
@@ -22,20 +22,15 @@ export const NutritionValues = ({ calories, protein, fats, carbohydrates }: Prop
             {items.map(({ key, label, value, unit }) => (
                 <Box
                     key={key}
-                    border="1px solid"
-                    borderColor="gray.200"
-                    rounded="xl"
-                    py={4}
-                    px={3}
-                    textAlign="center"
+                    {...nutritionSquareBoxStyle}
                 >
-                    <Text fontSize="sm" color="gray.600" mb={2}>
+                    <Text {...labelTextNutritionBoxStyle} >
                         {label}
                     </Text>
                     <Text fontSize="4xl" fontWeight="bold" color="green.600" lineHeight={1}>
                         {value}
                     </Text>
-                    <Text fontSize="sm" color="gray.600" mt={2}>
+                    <Text fontSize="sm" color="gray.600" >
                         {unit}
                     </Text>
                 </Box>
