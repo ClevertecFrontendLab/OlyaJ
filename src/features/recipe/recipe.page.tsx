@@ -116,10 +116,7 @@ function RecipePage() {
              {/* калории */}
             <Box {...calorieBoxStyle}>
                 <Text {...caloryTextStyle}>* Калорийность на 1 порцию</Text>
-
-                <Box >
-                    <NutritionValues {...recipe.nutritionValue}/>
-                </Box>
+                <NutritionValues {...recipe.nutritionValue}/>
             </Box>
 
         </Box>
