@@ -2,11 +2,14 @@ import { Box, Button, HStack, Icon, Image, Spinner, Text } from '@chakra-ui/reac
 import {
     buttonRecipeStyle,
     buttonsBoxStyle,
+    calorieBoxStyle,
+    caloryTextStyle,
     categoriesIconsStyle,
     categoryBoxStyle,
     descriptionBoxStyle,
     descriptionRecipeStyle,
     imageRecipeStyle,
+    nutritionalValueBoxStyle,
     pictureDescriptionBoxStyle,
     recipeCategoriesStyle,
     recipePageStyle,
@@ -30,6 +33,8 @@ import {
     iconStyle,
     likeSaveIconsBox,
 } from '@shared/ui/Cards/NewRecipeDescktopCard/newRecipeDesktopCard.styles';
+
+
 
 function RecipePage() {
     const { recipeId } = useParams<{ recipeId?: string }>();
@@ -85,7 +90,6 @@ function RecipePage() {
                     </Box>
 
                     {/* кнопки */}
-
                     <Box {...buttonsBoxStyle}>
                         <Text {...timeRecipeStyle}>{recipe.time} минут</Text>
                         <HStack spacing={{ base: '2', md: '2', lg: '4' }}>
@@ -108,6 +112,17 @@ function RecipePage() {
                     </Box>
                 </Box>
             </Box>
+            
+             {/* калории */}
+            <Box {...calorieBoxStyle}>
+                <Text {...caloryTextStyle}>* Калорийность на 1 порцию</Text>
+
+                <Box {...nutritionalValueBoxStyle}>
+                    
+
+                </Box>
+            </Box>
+
         </Box>
     );
 }

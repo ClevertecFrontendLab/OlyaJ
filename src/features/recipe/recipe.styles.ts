@@ -94,3 +94,27 @@ export const buttonRecipeStyle = {
     px: { base: 2, md: 3, lg: 4 },
     borderRadius: 'md',
 } as const;
+
+
+export const calorieBoxStyle = {
+    display:"flex",
+    flexDirection: "column",
+    mt:{base:"24px", md:"24px", lg:"40px"},
+} as const 
+
+
+export const caloryTextStyle = {
+    fontSize:"14px", 
+    fontWeight:400,
+    fontHeight: "20px",
+    color: "var(--blackAlpha-800, rgba(0, 0, 0, 0.80))",
+}
+
+
+export const nutritionalValueBoxStyle = {
+    display:"flex",
+    flexDirection:{base:"column", md:"row", lg:"row"},
+    gap: {base:"12px", md:"12px", lg:"24px"},
+} as const 
+
+
