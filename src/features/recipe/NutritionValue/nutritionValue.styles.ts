@@ -23,3 +23,17 @@ export const labelTextNutritionBoxStyle = {
     fontSize:"14px",
     color: "var(--blackAlpha-600, rgba(0, 0, 0, 0.48))",
 }
+
+
+export const valueTextNutritionStyle = {
+    fontSize:{base:"24px", md:"36px", lg:"36px"},
+    fontWeight:"500",
+    color: "var(--Lime-800, #134B00)",
+    lineHeight:{base:"32px", md:"40px", lg:"40px"}
+}
+
+
+export const unitTextNutritionStyle = {
+    fontSize:{base:"12px", md:"14px", lg:"14px"},
+    color: "var(--blackAlpha-900, rgba(0, 0, 0, 0.92))",
+}
