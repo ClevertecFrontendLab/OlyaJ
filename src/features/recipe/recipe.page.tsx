@@ -9,6 +9,8 @@ import {
     descriptionBoxStyle,
     descriptionRecipeStyle,
     imageRecipeStyle,
+    ingredientsSelectBoxStyle,
+    ingredientsTextStyle,
     pictureDescriptionBoxStyle,
     recipeCategoriesStyle,
     recipePageStyle,
@@ -33,6 +35,7 @@ import {
     likeSaveIconsBox,
 } from '@shared/ui/Cards/NewRecipeDescktopCard/newRecipeDesktopCard.styles';
 import { NutritionValues } from './NutritionValue/nutritionValue';
+import { PortionSelector } from './PortionSelector/PortionSelector';
 
 
 
@@ -113,11 +116,17 @@ function RecipePage() {
                 </Box>
             </Box>
             
-             {/* калории */}
+            {/* калории */}
             <Box {...calorieBoxStyle}>
                 <Text {...caloryTextStyle}>* Калорийность на 1 порцию</Text>
                 <NutritionValues {...recipe.nutritionValue}/>
             </Box>
+
+            {/* ингредиенты + порции */}
+                <Box {...ingredientsSelectBoxStyle}>
+                    <Text {...ingredientsTextStyle}>ИНГРЕДИЕНТЫ</Text>
+                    <PortionSelector/>
+                </Box>
 
         </Box>
     );

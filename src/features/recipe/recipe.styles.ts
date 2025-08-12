@@ -114,5 +114,23 @@ export const caloryTextStyle = {
 }
 
 
+export const ingredientsSelectBoxStyle = {
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    mt:{base:"32px", md:"32px", lg:'48px'},
+    w:{base:"328px",md:"728px",lg:"668px"},
+} as const 
+
+
+export const ingredientsTextStyle = {
+    fonstSize:"12px",
+    lineHeight:"16px",
+    color: "var(--Lime-600, #2DB100)",
+    fontWeight:700,
+}
+
+
 
 
