@@ -1,5 +1,6 @@
 import { Box, Button, HStack, Icon, Image, Spinner, Text } from '@chakra-ui/react';
 import {
+    allIngredientsBoxStyle,
     buttonRecipeStyle,
     buttonsBoxStyle,
     calorieBoxStyle,
@@ -9,6 +10,7 @@ import {
     descriptionBoxStyle,
     descriptionRecipeStyle,
     imageRecipeStyle,
+    ingredientRowStyle,
     ingredientsSelectBoxStyle,
     ingredientsTextStyle,
     pictureDescriptionBoxStyle,
@@ -126,6 +128,15 @@ function RecipePage() {
                 <Box {...ingredientsSelectBoxStyle}>
                     <Text {...ingredientsTextStyle}>ИНГРЕДИЕНТЫ</Text>
                     <PortionSelector/>
+                </Box>
+
+                <Box {...allIngredientsBoxStyle}>
+                    {recipe.ingredients.map((ing)=>(
+                        <HStack key={ing.title} {...ingredientRowStyle}>
+                            <Text>{ing.title}</Text>
+                            <Text>{`${ing.count} ${ing.measureUnit}`}</Text>
+                        </HStack>
+                    ))}
                 </Box>
 
         </Box>

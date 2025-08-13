@@ -132,5 +132,21 @@ export const ingredientsTextStyle = {
 }
 
 
+export const allIngredientsBoxStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    w: { base: "328px", md: "728px", lg: "668px" },
+} as const;
+
+
+export const ingredientRowStyle = {
+    justifyContent: "space-between",
+    px: 4,
+    py: 3,
+    _odd: { bg: "white" },
+    _even: { bg: "gray.50" },
+} as const;
+
 
 
