@@ -1,9 +1,9 @@
-// список карточек — без изменений
 export const nutritionalValueBoxStyle = {
     display: "flex",
     flexDirection: { base: "column", md: "row", lg: "row" },
     gap: { base: "12px", md: "12px", lg: "24px" },
 } as const;
+
 
 export const nutritionSquareBoxStyle = {
     display: { base: "grid", md: "flex" },
@@ -28,6 +28,7 @@ export const labelTextNutritionBoxStyle = {
     textAlign: { base: "left", md: "center" },
 } as const;
 
+
 export const valueTextNutritionStyle = {
     fontSize: { base: "24px", md: "36px", lg: "36px" },
     fontWeight: "500",
@@ -36,6 +37,7 @@ export const valueTextNutritionStyle = {
     textAlign: { base: "center", md: "center" }, 
     justifySelf: { base: "center" },       
 } as const;
+
 
 export const unitTextNutritionStyle = {
     fontSize: { base: "12px", md: "14px", lg: "14px" },

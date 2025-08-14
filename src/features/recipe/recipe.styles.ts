@@ -154,4 +154,59 @@ export const ingredientRowStyle = {
 } as const;
 
 
+export const recipeStepsBoxStyle = {
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"start",
+    gap:"20px",
+    mt:{base:"24px", md:"24px", lg:"40px"},
+    w: { base: "328px", md: "728px", lg: "668px" },
+} as const 
+
+
+export const recipeStepsTextStyle = {
+    fontSize:{base:"24px", md:"24px", lg:"48px"},
+    fontWeight:500,
+    lineHeight:{base:"32px", md:"32px", lg:'48px'}
+}
+
+
+export const recipeCardBoxStyle = {
+    display:"flex",
+    flexDirection:"column",
+    gap:"20px"
+} as const 
+
+
+export const stepCardStyle = {
+    display:"flex",
+    flexDirection:"row",
+    borderRadius: "8px",
+    border: "1px solid var(--blackAlpha-200, rgba(0, 0, 0, 0.08))",
+    background: "var(--white, #FFF)",
+    w: { base: "328px", md: "728px", lg: "668px" },
+    overflow:"hidden",
+} as const 
+
+
+export const stepCardImageStyle = {
+    w:{base:"158px", md:"158px",lg:"346px"}
+}
+
+
+export const recipeCardDescriptionBoxStyle = {
+    display:"flex",
+    flexDirection:"column",
+    px:{base:"8px", md:"8px",lg:"24px"},
+    py:{base:"8px", md:"8px",lg:"20px"}
+} as const 
+
+
+export const recipeCardDescriptionTextStyle = {
+    fontSize:"14px",
+    fontWeight:400,
+    lineHeight:"20px"
+}
+
+
 

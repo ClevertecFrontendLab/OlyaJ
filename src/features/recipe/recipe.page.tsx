@@ -14,8 +14,15 @@ import {
     ingredientsSelectBoxStyle,
     ingredientsTextStyle,
     pictureDescriptionBoxStyle,
+    recipeCardBoxStyle,
+    recipeCardDescriptionBoxStyle,
+    recipeCardDescriptionTextStyle,
     recipeCategoriesStyle,
     recipePageStyle,
+    recipeStepsBoxStyle,
+    recipeStepsTextStyle,
+    stepCardImageStyle,
+    stepCardStyle,
     timeRecipeStyle,
     titleDescriptionBoxStyle,
     titleRecipeStyle,
@@ -37,8 +44,9 @@ import {
     likeSaveIconsBox,
 } from '@shared/ui/Cards/NewRecipeDescktopCard/newRecipeDesktopCard.styles';
 import { PortionSelector } from './PortionSelector/PortionSelector';
-import { NutritionValues } from './NutritionValue/nutritionValue';
 import { useMemo, useState } from 'react';
+import { NutritionValues } from './NutritionValue/NutritionValue';
+
 
 
 
@@ -157,7 +165,21 @@ function RecipePage() {
                     ))}
                 </Box>
 
-                
+                {/* шаши приготовления рецепта */}
+                <Box {...recipeStepsBoxStyle}>
+                    <Text {...recipeStepsTextStyle}>Шаги приготовления</Text>
+                    <Box {...recipeCardBoxStyle}>
+                        {recipe.steps.map(step=>(
+                            <Box {...stepCardStyle}>
+                                <Image src={BASE_URL + step.image} alt="image" {...stepCardImageStyle}/>
+                                <Box {...recipeCardDescriptionBoxStyle}>
+                                    <Text>{step.stepNumber}</Text>
+                                    <Text {...recipeCardDescriptionTextStyle}>{step.description}</Text>
+                                </Box>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
 
         </Box>
     );
