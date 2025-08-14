@@ -13,7 +13,7 @@ export type Step = {
   
   export type Ingredient = {
     title: string;
-    count: string;
+    count: number;
     measureUnit: string;
   }
   

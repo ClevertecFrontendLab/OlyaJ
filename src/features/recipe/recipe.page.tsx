@@ -36,8 +36,9 @@ import {
     iconStyle,
     likeSaveIconsBox,
 } from '@shared/ui/Cards/NewRecipeDescktopCard/newRecipeDesktopCard.styles';
-import { NutritionValues } from './NutritionValue/nutritionValue';
 import { PortionSelector } from './PortionSelector/PortionSelector';
+import { NutritionValues } from './NutritionValue/nutritionValue';
+import { useMemo, useState } from 'react';
 
 
 
@@ -54,6 +55,23 @@ function RecipePage() {
 
     const { categories } = useCategoryMap();
     const { categoryTitles } = getCategoryPairFromRecipe(recipe as Recipe, categories || []);
+
+    const baseServings = recipe?.portions ?? 4 
+    const [servings, setServings] = useState(baseServings)
+    const scale = useMemo(()=>servings/baseServings, [servings, baseServings])
+
+    const scaledCount = (count: number, unit: string) => {
+        const u = (unit || "").toLowerCase();
+
+        const discreteUnits = ["шт", "зубчик", "зубчика", "зубчиков", "пучок", "пучка", "пучков"];
+        const isDiscrete = discreteUnits.includes(u);
+    
+        const raw = count * scale;
+        const qty = isDiscrete ? Math.max(1, Math.round(raw)) : Math.round(raw * 10) / 10; 
+    
+        return `${qty} ${unit}`;
+      };
+
 
     if (isLoading) return <Spinner />;
     if (error || !recipe) return <Error />;
@@ -127,17 +145,19 @@ function RecipePage() {
             {/* ингредиенты + порции */}
                 <Box {...ingredientsSelectBoxStyle}>
                     <Text {...ingredientsTextStyle}>ИНГРЕДИЕНТЫ</Text>
-                    <PortionSelector/>
+                    <PortionSelector value={servings} onChange={setServings} />
                 </Box>
 
                 <Box {...allIngredientsBoxStyle}>
                     {recipe.ingredients.map((ing)=>(
                         <HStack key={ing.title} {...ingredientRowStyle}>
                             <Text>{ing.title}</Text>
-                            <Text>{`${ing.count} ${ing.measureUnit}`}</Text>
+                            <Text>{scaledCount(ing.count, ing.measureUnit)}</Text>
                         </HStack>
                     ))}
                 </Box>
+
+                
 
         </Box>
     );
