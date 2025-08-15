@@ -173,7 +173,7 @@ function RecipePage() {
                             <Box {...stepCardStyle}>
                                 <Image src={BASE_URL + step.image} alt="image" {...stepCardImageStyle}/>
                                 <Box {...recipeCardDescriptionBoxStyle}>
-                                    <Text>{step.stepNumber}</Text>
+                                    <Text>Шаг {step.stepNumber}</Text>
                                     <Text {...recipeCardDescriptionTextStyle}>{step.description}</Text>
                                 </Box>
                             </Box>

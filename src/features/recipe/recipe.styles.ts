@@ -202,6 +202,7 @@ export const recipeCardDescriptionBoxStyle = {
 } as const 
 
 
+
 export const recipeCardDescriptionTextStyle = {
     fontSize:"14px",
     fontWeight:400,
