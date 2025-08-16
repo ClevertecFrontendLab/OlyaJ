@@ -11,6 +11,7 @@ export type Step = {
     carbohydrates: number;
   }
   
+
   export type Ingredient = {
     title: string;
     count: number;
@@ -37,6 +38,7 @@ export type Step = {
     createdAt?: string;
   }
 
+  
   export type GetAllRecipesParams = {
     page?: number;
     limit?: number;
