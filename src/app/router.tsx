@@ -12,6 +12,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.AUTH,
+        lazy: ()=> import('@features/auth/login.page'),
       },
       {
         path: ROUTES.SUBCATEGORY,
