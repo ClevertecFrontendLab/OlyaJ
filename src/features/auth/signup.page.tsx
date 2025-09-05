@@ -1,5 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { AuthLayout } from "./ui/AuthLayout";
+import { AuthLayout } from "./ui/authLayout";
 import { Box, Text, Link } from "@chakra-ui/react";
 import { ROUTES } from "@shared/model/routes";
 

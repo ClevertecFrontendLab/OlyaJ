@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
         lazy: ()=> import('@features/auth/signup.page')
       },
       {
+        path: ROUTES.FORGOT_PASSWORD,
+        lazy: ()=> import('@features/auth/ui/ForgotPassword/forgot-password.page')
+      },
+      {
         path: ROUTES.SUBCATEGORY,
         lazy: () => import('@features/subcategory/subcategory.page'),
       },

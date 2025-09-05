@@ -7,7 +7,7 @@ import {
     Heading,
     Text,
 } from "@chakra-ui/react";
-import { authLayoutCardStyle, footerTextStyle, headingCardTitleStyle } from "./AuthLayout.styles";
+import { authLayoutCardStyle, footerTextStyle, headingCardTitleStyle } from "./authLayout.styles";
 
 
 interface AuthLayoutProps {

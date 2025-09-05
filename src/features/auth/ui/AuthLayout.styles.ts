@@ -4,6 +4,7 @@ export const authLayoutCardStyle = {
     alignItems:'center',
     justifyContent:'center',
     flex:1,
+    width: '378px'
 } as const
 
 

@@ -1,7 +1,8 @@
 import { Link as RouterLink } from "react-router-dom";
-import { AuthLayout } from "./ui/AuthLayout";
-import { Box, Text, Link } from "@chakra-ui/react";
+import { Text, Link } from "@chakra-ui/react";
 import { ROUTES } from "@shared/model/routes";
+import { LoginForm } from "./ui/LoginForm /loginForm";
+import { AuthLayout } from "./ui/authLayout";
 
 
 
@@ -9,7 +10,7 @@ function LoginPage() {
   return (
     <AuthLayout
         title="Вход в систему"
-        form={<Box></Box>}
+        form={<LoginForm/>}
         footerText={
             <Text>Нет аккаунта?{" "}
             <Link

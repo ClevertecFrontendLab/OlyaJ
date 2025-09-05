@@ -2,6 +2,7 @@ export const ROUTES = {
     MAIN: '/',
     AUTH: '/auth',
     SIGNUP: '/signup',
+    FORGOT_PASSWORD: '/forgot-password', 
     SUBCATEGORY: '/:categoryId/:subcategoryId',
     RECIPE: '/:categoryId/:subcategoryId/:recipeId',
     MOST_JUICY: '/mostJuicy',
