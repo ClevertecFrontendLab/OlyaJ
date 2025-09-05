@@ -7,34 +7,31 @@ import {
     Heading,
     Text,
 } from "@chakra-ui/react";
+import { authLayoutCardStyle, footerTextStyle, headingCardTitleStyle } from "./AuthLayout.styles";
+
 
 interface AuthLayoutProps {
     form: React.ReactNode;
     title: React.ReactNode;
-    description: React.ReactNode;
     footerText: React.ReactNode;
 }
 
 export function AuthLayout({
     form,
     title,
-    description,
     footerText,
 }: AuthLayoutProps) {
     return (
-        <Box as="main" flex="1" display="flex" flexDirection="column" pt="200px" alignItems="center">
-            <Card w="full" maxW="400px">
+        <Box as="main" >
+            <Card {...authLayoutCardStyle}>
                 <CardHeader>
-                    <Heading size="md">{title}</Heading>
-                    <Text color="gray.500" fontSize="sm">
-                        {description}
-                    </Text>
+                    <Heading {...headingCardTitleStyle}>{title}</Heading>
                 </CardHeader>
 
                 <CardBody>{form}</CardBody>
 
                 <CardFooter>
-                    <Text fontSize="sm" color="gray.500">
+                    <Text {...footerTextStyle}>
                         {footerText}
                     </Text>
                 </CardFooter>
