@@ -1,14 +1,15 @@
 import { Link as RouterLink } from "react-router-dom";
 import { AuthLayout } from "./ui/authLayout";
-import { Box, Text, Link } from "@chakra-ui/react";
+import { Text, Link } from "@chakra-ui/react";
 import { ROUTES } from "@shared/model/routes";
+import { SignUpForm } from "./ui/SignUpForm/signUpForm";
 
 
 function SignUpPage() {
     return (
         <AuthLayout
             title="Регистрация"
-            form={<Box></Box>}
+            form={<SignUpForm/>}
             footerText={
                 <Text>Уже есть аккаунт?{" "}
                     <Link
