@@ -10,7 +10,6 @@ import {
     FormLabel,
     Input,
     Text,
-    useToast,
 } from "@chakra-ui/react";
 import { SignUpType } from "../../../../entities/auth/model/authTypes";
 import { useSignUpMutation } from "../../../../entities/auth/api/authApi";
@@ -34,7 +33,6 @@ const signUpSchema = z
 type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export function SignUpForm() {
-    const toast = useToast();
     const [serverError, setServerError] = useState<string | null>(null);
     const [signUp, { isLoading }] = useSignUpMutation();
 
@@ -58,53 +56,7 @@ export function SignUpForm() {
     });
 
     const onSubmit = async (values: SignUpFormValues) => {
-        setServerError(null);
-
-        const body: SignUpType = {
-            email: values.email.trim(),
-            login: values.login.trim(),
-            password: values.password,
-            firstName: values.firstName.trim(),
-            lastName: values.lastName.trim(),
-        };
-
-        try {
-            // дергаем мутацию и ждём успешного ответа
-            const res = await signUp(body).unwrap();
-
-            // покажем тост об успехе
-            toast({
-                title: res?.message || "Регистрация прошла успешно",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-            });
-
-            reset();
-        } catch (err: unknown) {
-            const e = err as any;
-
-            const fieldErrors: Array<{ field: string; message: string }> | undefined =
-                e?.data?.errors || e?.errors;
-
-            if (Array.isArray(fieldErrors) && fieldErrors.length) {
-                fieldErrors.forEach((fe) => {
-                    if (
-                        fe?.field &&
-                        ["email", "login", "firstName", "lastName", "password", "passwordConfirm"].includes(
-                            fe.field
-                        )
-                    ) {
-                        setError(fe.field as keyof SignUpFormValues, { type: "server", message: fe.message });
-                    }
-                });
-            }
-            const apiMsg =
-                e?.data?.message ||
-                e?.error ||
-                (typeof e === "string" ? e : "Не удалось выполнить регистрацию");
-            setServerError(apiMsg);
-        }
+       
     };
 
     return (
