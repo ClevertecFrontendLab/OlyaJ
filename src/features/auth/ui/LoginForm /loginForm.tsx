@@ -39,18 +39,7 @@ export function LoginForm() {
     });
 
     const onSubmit = async (values: LoginFormValues) => {
-        setServerError(null);
-        const body: LoginType = { login: values.login.trim(), password: values.password };
-        try {
-            const res = await login(body).unwrap();
-            console.info(res?.message || "Успешный вход");
-        } catch (e: any) {
-            const apiMsg =
-                e?.data?.message ||
-                e?.error ||
-                (typeof e === "string" ? e : "Не удалось выполнить вход");
-            setServerError(apiMsg);
-        }
+       
     };
 
 
