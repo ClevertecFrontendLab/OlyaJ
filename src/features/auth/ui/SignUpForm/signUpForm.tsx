@@ -56,7 +56,9 @@ export function SignUpForm() {
     });
 
     const onSubmit = async (values: SignUpFormValues) => {
-       
+       try {
+        
+       }
     };
 
     return (
