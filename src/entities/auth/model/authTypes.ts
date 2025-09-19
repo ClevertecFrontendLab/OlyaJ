@@ -31,3 +31,15 @@ export type AuthResponse = {
     statusText: string;
     message: string;
 };
+
+
+export type ApiErrorBody = {
+    message?: string;
+    statusCode?: number;
+    error?: string;      
+};
+
+
+export type ApiError =
+    | { status: number; data?: ApiErrorBody } 
+    | { error: string };                  
